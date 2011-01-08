@@ -1846,7 +1846,8 @@ void CApplication::RenderScreenSaver()
     return;
 
   if (m_screenSaver->ID() != "screensaver.xbmc.builtin.dim" &&
-      m_screenSaver->ID() != "screensaver.xbmc.builtin.black")
+      m_screenSaver->ID() != "screensaver.xbmc.builtin.black" &&
+      m_screenSaver->ID() != "screensaver.xbmc.builtin.slideshow")
     return; // nothing to do
 
   float amount = 1.0f;
