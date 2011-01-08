@@ -386,13 +386,13 @@ int CGUIInfoManager::TranslateSingleString(const CStdString &strCondition)
     else if (strTest.Left(16).Equals("system.hasalarm("))
       return AddMultiInfo(GUIInfo(bNegate ? -SYSTEM_HAS_ALARM : SYSTEM_HAS_ALARM, ConditionalStringParameter(strTest.Mid(16,strTest.size()-17)), 0));
     else if (strTest.Equals("system.alarmpos")) ret = SYSTEM_ALARM_POS;
-  else if (strTest.Left(24).Equals("system.alarmlessorequal("))
-  {
-    int pos = strTest.Find(",");
-    int skinOffset = ConditionalStringParameter(strTest.Mid(24, pos-24));
-    int compareString = ConditionalStringParameter(strTest.Mid(pos + 1, strTest.GetLength() - (pos + 2)));
-    return AddMultiInfo(GUIInfo(bNegate ? -SYSTEM_ALARM_LESS_OR_EQUAL: SYSTEM_ALARM_LESS_OR_EQUAL, skinOffset, compareString));
-  }
+    else if (strTest.Left(24).Equals("system.alarmlessorequal("))
+    {
+      int pos = strTest.Find(",");
+      int skinOffset = ConditionalStringParameter(strTest.Mid(24, pos-24));
+      int compareString = ConditionalStringParameter(strTest.Mid(pos + 1, strTest.GetLength() - (pos + 2)));
+      return AddMultiInfo(GUIInfo(bNegate ? -SYSTEM_ALARM_LESS_OR_EQUAL: SYSTEM_ALARM_LESS_OR_EQUAL, skinOffset, compareString));
+    }
     else if (strTest.Equals("system.profilename")) ret = SYSTEM_PROFILENAME;
     else if (strTest.Equals("system.profilethumb")) ret = SYSTEM_PROFILETHUMB;
     else if (strTest.Equals("system.progressbar")) ret = SYSTEM_PROGRESS_BAR;
@@ -1087,24 +1087,24 @@ CStdString CGUIInfoManager::GetLabel(int info, int contextWindow)
     break;
   case PLAYER_PATH:
   case PLAYER_FILEPATH:
-     if (m_currentFile)
-     {
-       if (m_currentFile->HasMusicInfoTag())
-         strLabel = m_currentFile->GetMusicInfoTag()->GetURL();
-       else if (m_currentFile->HasVideoInfoTag())
-         strLabel = m_currentFile->GetVideoInfoTag()->m_strFileNameAndPath;
-       if (strLabel.IsEmpty())
-         strLabel = m_currentFile->m_strPath;
-     }
-     if (info == PLAYER_PATH)
-     {
-       // do this twice since we want the path outside the archive if this
-       // is to be of use.
-       if (CUtil::IsInArchive(strLabel))
-         strLabel = CUtil::GetParentPath(strLabel);
-       strLabel = CUtil::GetParentPath(strLabel);
-     }
-     break;
+    if (m_currentFile)
+    {
+      if (m_currentFile->HasMusicInfoTag())
+        strLabel = m_currentFile->GetMusicInfoTag()->GetURL();
+      else if (m_currentFile->HasVideoInfoTag())
+        strLabel = m_currentFile->GetVideoInfoTag()->m_strFileNameAndPath;
+      if (strLabel.IsEmpty())
+        strLabel = m_currentFile->m_strPath;
+    }
+    if (info == PLAYER_PATH)
+    {
+      // do this twice since we want the path outside the archive if this
+      // is to be of use.
+      if (CUtil::IsInArchive(strLabel))
+        strLabel = CUtil::GetParentPath(strLabel);
+      strLabel = CUtil::GetParentPath(strLabel);
+    }
+    break;
   case MUSICPLAYER_TITLE:
   case MUSICPLAYER_ALBUM:
   case MUSICPLAYER_ARTIST:
@@ -3439,8 +3439,8 @@ CTemperature CGUIInfoManager::GetGPUTemperature()
 CStdString CGUIInfoManager::GetVersion()
 {
   CStdString tmp;
-#ifdef SVN_REV
-  tmp.Format("%s r%s", VERSION_STRING, SVN_REV);
+#ifdef GIT_REV
+  tmp.Format("%s Git:%s", VERSION_STRING, GIT_REV);
 #else
   tmp.Format("%s", VERSION_STRING);
 #endif
@@ -3918,7 +3918,7 @@ CStdString CGUIInfoManager::GetItemLabel(const CFileItem *item, int info) const
   case LISTITEM_FILENAME_AND_PATH:
     {
       CStdString path;
-    if (item->IsMusicDb() && item->HasMusicInfoTag())
+      if (item->IsMusicDb() && item->HasMusicInfoTag())
         path = item->GetMusicInfoTag()->GetURL();
       else if (item->IsVideoDb() && item->HasVideoInfoTag())
         path = item->GetVideoInfoTag()->m_strFileNameAndPath;

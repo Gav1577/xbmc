@@ -65,7 +65,7 @@ bool CGUIDialogMusicOSD::OnMessage(CGUIMessage &message)
       return true;
     }
     break;
-    }
+  }
   return CGUIDialog::OnMessage(message);
 }
 

@@ -303,17 +303,17 @@ void CGUIDialogVideoBookmarks::AddEpisodeBookmark()
   if(episodes.size() > 0)
   {
     CContextButtons choices;
-      for (unsigned int i=0; i < episodes.size(); ++i)
-      {
-        CStdString strButton;
-        strButton.Format("%s %i, %s %i", g_localizeStrings.Get(20373), episodes[i].m_iSeason, g_localizeStrings.Get(20359).c_str(), episodes[i].m_iEpisode);
+    for (unsigned int i=0; i < episodes.size(); ++i)
+    {
+      CStdString strButton;
+      strButton.Format("%s %i, %s %i", g_localizeStrings.Get(20373), episodes[i].m_iSeason, g_localizeStrings.Get(20359).c_str(), episodes[i].m_iEpisode);
       choices.Add(i, strButton);
-      }
+    }
 
     int pressed = CGUIDialogContextMenu::ShowAndGetChoice(choices);
     if (pressed >= 0)
       AddBookmark(&episodes[pressed]);
-    }
+  }
 }
 
 

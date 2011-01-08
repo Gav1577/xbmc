@@ -1194,8 +1194,8 @@ void ff_h264_pred_init(H264PredContext *h, int codec_id){
             h->pred4x4[VERT_PRED       ]= pred4x4_vertical_vp8_c;
             h->pred4x4[HOR_PRED        ]= pred4x4_horizontal_vp8_c;
         } else {
-        h->pred4x4[VERT_PRED           ]= pred4x4_vertical_c;
-        h->pred4x4[HOR_PRED            ]= pred4x4_horizontal_c;
+            h->pred4x4[VERT_PRED       ]= pred4x4_vertical_c;
+            h->pred4x4[HOR_PRED        ]= pred4x4_horizontal_c;
         }
         h->pred4x4[DC_PRED             ]= pred4x4_dc_c;
         if(codec_id == CODEC_ID_SVQ3)
@@ -1208,7 +1208,7 @@ void ff_h264_pred_init(H264PredContext *h, int codec_id){
         if (codec_id == CODEC_ID_VP8) {
             h->pred4x4[VERT_LEFT_PRED  ]= pred4x4_vertical_left_vp8_c;
         } else
-        h->pred4x4[VERT_LEFT_PRED      ]= pred4x4_vertical_left_c;
+            h->pred4x4[VERT_LEFT_PRED  ]= pred4x4_vertical_left_c;
         h->pred4x4[HOR_UP_PRED         ]= pred4x4_horizontal_up_c;
         h->pred4x4[LEFT_DC_PRED        ]= pred4x4_left_dc_c;
         h->pred4x4[TOP_DC_PRED         ]= pred4x4_top_dc_c;

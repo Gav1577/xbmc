@@ -33,7 +33,7 @@ static int read_random(uint32_t *dst, const char *file)
     if (fd == -1)
         return -1;
     err = read(fd, dst, sizeof(*dst));
-        close(fd);
+    close(fd);
 
     return err;
 }
@@ -55,7 +55,7 @@ static uint32_t get_generic_seed(void)
             }else{
                 random= 2*random + (i&1);
                 bits++;
-    }
+            }
         }
         last_t= t;
     }
@@ -75,7 +75,7 @@ uint32_t av_get_random_seed(void)
     uint32_t seed;
 
     if (read_random(&seed, "/dev/urandom") == sizeof(seed))
-    return seed;
+        return seed;
     if (read_random(&seed, "/dev/random")  == sizeof(seed))
         return seed;
     return get_generic_seed();

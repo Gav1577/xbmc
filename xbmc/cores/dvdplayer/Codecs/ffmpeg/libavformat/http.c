@@ -445,7 +445,7 @@ static int http_close(URLContext *h)
     }
 
     if (s->hd)
-    url_close(s->hd);
+        url_close(s->hd);
     return ret;
 }
 

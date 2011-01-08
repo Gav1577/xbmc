@@ -34,6 +34,7 @@ CGUISliderControl::CGUISliderControl(int parentID, int controlID, float posX, fl
   m_iPercent = 0;
   m_iStart = 0;
   m_iEnd = 100;
+  m_iInterval = 1;
   m_fStart = 0.0f;
   m_fEnd = 1.0f;
   m_fInterval = 0.1f;
@@ -50,37 +51,37 @@ CGUISliderControl::~CGUISliderControl(void)
 void CGUISliderControl::Render()
 {
   m_guiBackground.SetPosition( m_posX, m_posY );
-    if (m_iInfoCode)
-      SetIntValue(g_infoManager.GetInt(m_iInfoCode));
+  if (m_iInfoCode)
+    SetIntValue(g_infoManager.GetInt(m_iInfoCode));
 
-    float fScaleX = m_width == 0 ? 1.0f : m_width / m_guiBackground.GetTextureWidth();
-    float fScaleY = m_height == 0 ? 1.0f : m_height / m_guiBackground.GetTextureHeight();
+  float fScaleX = m_width == 0 ? 1.0f : m_width / m_guiBackground.GetTextureWidth();
+  float fScaleY = m_height == 0 ? 1.0f : m_height / m_guiBackground.GetTextureHeight();
 
-    m_guiBackground.SetHeight(m_height);
-    m_guiBackground.SetWidth(m_width);
-    m_guiBackground.Render();
+  m_guiBackground.SetHeight(m_height);
+  m_guiBackground.SetWidth(m_width);
+  m_guiBackground.Render();
 
-    float fWidth = (m_guiBackground.GetTextureWidth() - m_guiMid.GetTextureWidth())*fScaleX;
+  float fWidth = (m_guiBackground.GetTextureWidth() - m_guiMid.GetTextureWidth())*fScaleX;
 
-    float fPos = m_guiBackground.GetXPosition() + GetProportion() * fWidth;
+  float fPos = m_guiBackground.GetXPosition() + GetProportion() * fWidth;
 
-    if ((int)fWidth > 1)
-    {
+  if ((int)fWidth > 1)
+  {
     if (m_bHasFocus && !IsDisabled())
-      {
-        m_guiMidFocus.SetPosition(fPos, m_guiBackground.GetYPosition() );
-        m_guiMidFocus.SetWidth(m_guiMidFocus.GetTextureWidth() * fScaleX);
-        m_guiMidFocus.SetHeight(m_guiMidFocus.GetTextureHeight() * fScaleY);
-        m_guiMidFocus.Render();
-      }
-      else
-      {
-        m_guiMid.SetPosition(fPos, m_guiBackground.GetYPosition() );
-        m_guiMid.SetWidth(m_guiMid.GetTextureWidth()*fScaleX);
-        m_guiMid.SetHeight(m_guiMid.GetTextureHeight()*fScaleY);
-        m_guiMid.Render();
-      }
+    {
+      m_guiMidFocus.SetPosition(fPos, m_guiBackground.GetYPosition() );
+      m_guiMidFocus.SetWidth(m_guiMidFocus.GetTextureWidth() * fScaleX);
+      m_guiMidFocus.SetHeight(m_guiMidFocus.GetTextureHeight() * fScaleY);
+      m_guiMidFocus.Render();
     }
+    else
+    {
+      m_guiMid.SetPosition(fPos, m_guiBackground.GetYPosition() );
+      m_guiMid.SetWidth(m_guiMid.GetTextureWidth()*fScaleX);
+      m_guiMid.SetHeight(m_guiMid.GetTextureHeight()*fScaleY);
+      m_guiMid.Render();
+    }
+  }
   CGUIControl::Render();
 }
 
@@ -138,13 +139,13 @@ void CGUISliderControl::Move(int iNumSteps)
     break;
 
   case SPIN_CONTROL_TYPE_INT:
-    m_iValue += iNumSteps;
+    m_iValue += m_iInterval * iNumSteps;
     if (m_iValue < m_iStart) m_iValue = m_iStart;
     if (m_iValue > m_iEnd) m_iValue = m_iEnd;
     break;
 
   default:
-    m_iPercent += iNumSteps;
+    m_iPercent += m_iInterval * iNumSteps;
     if (m_iPercent < 0) m_iPercent = 0;
     if (m_iPercent > 100) m_iPercent = 100;
     break;
@@ -204,9 +205,20 @@ float CGUISliderControl::GetFloatValue() const
     return (float)m_iPercent;
 }
 
+void CGUISliderControl::SetIntInterval(int iInterval)
+{
+  if (m_iType == SPIN_CONTROL_TYPE_FLOAT)
+    m_fInterval = (float)iInterval;
+  else
+    m_iInterval = iInterval;
+}
+
 void CGUISliderControl::SetFloatInterval(float fInterval)
 {
-  m_fInterval = fInterval;
+  if (m_iType == SPIN_CONTROL_TYPE_FLOAT)
+    m_fInterval = fInterval;
+  else
+    m_iInterval = (int)fInterval;
 }
 
 void CGUISliderControl::SetRange(int iStart, int iEnd)

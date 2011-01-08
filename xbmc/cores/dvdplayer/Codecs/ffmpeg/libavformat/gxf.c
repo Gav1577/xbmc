@@ -410,7 +410,7 @@ start:
     last_found_pos = url_ftell(pb) - 16 - 6;
     if ((track >= 0 && track != cur_track) || (timestamp >= 0 && timestamp > cur_timestamp)) {
         if (url_fseek(pb, last_pos, SEEK_SET) >= 0)
-        goto start;
+            goto start;
     }
 out:
     if (last_found_pos)

@@ -1405,8 +1405,8 @@ void CVideoDatabase::DeleteDetailsForTvShow(const CStdString& strPath)
 void CVideoDatabase::GetMoviesByActor(const CStdString& strActor, CFileItemList& items)
 {
   CStdString where = PrepareSQL("join actorlinkmovie on actorlinkmovie.idMovie=movieview.idMovie "
-               "join actors on actors.idActor=actorlinkmovie.idActor "
-               "where actors.strActor='%s'", strActor.c_str());
+                                "join actors on actors.idActor=actorlinkmovie.idActor "
+                                "where actors.strActor='%s'", strActor.c_str());
   GetMoviesByWhere("videodb://1/2/", where, "", items);
 }
 
@@ -2831,11 +2831,11 @@ CVideoInfoTag CVideoDatabase::GetDetailsForEpisode(auto_ptr<Dataset> &pDS, bool 
 
         if (it == actors.end())
         {
-        SActorInfo info;
-        info.strName = m_pDS2->fv("actors.strActor").get_asString();
-        info.strRole = m_pDS2->fv("actorlinkepisode.strRole").get_asString();
-        info.thumbUrl.ParseString(m_pDS2->fv("actors.strThumb").get_asString());
-        details.m_cast.push_back(info);
+          SActorInfo info;
+          info.strName = m_pDS2->fv("actors.strActor").get_asString();
+          info.strRole = m_pDS2->fv("actorlinkepisode.strRole").get_asString();
+          info.thumbUrl.ParseString(m_pDS2->fv("actors.strThumb").get_asString());
+          details.m_cast.push_back(info);
           actors.insert(idActor);
         }
         m_pDS2->next();

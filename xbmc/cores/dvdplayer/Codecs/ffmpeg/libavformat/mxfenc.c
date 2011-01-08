@@ -1125,18 +1125,12 @@ static void mxf_write_index_table_segment(AVFormatContext *s)
 
         for (i = 0; i < mxf->edit_units_count; i++) {
             int temporal_offset = 0;
-
-            if (!(mxf->index_entries[i].flags & 0x33)) { // I frame
-                mxf->last_key_index = key_index;
-                key_index = i;
-            }
-
             if (temporal_reordering) {
                 int pic_num_in_gop = i - key_index;
                 if (pic_num_in_gop != mxf->index_entries[i].temporal_ref) {
                     for (j = key_index; j < mxf->edit_units_count; j++) {
                         if (pic_num_in_gop == mxf->index_entries[j].temporal_ref)
-                        break;
+                            break;
                     }
                     if (j == mxf->edit_units_count)
                         av_log(s, AV_LOG_WARNING, "missing frames\n");

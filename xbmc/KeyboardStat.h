@@ -64,7 +64,7 @@ public:
   void       ProcessKeyUp(void);
 
 private:
-  uint8_t m_VKey;
+  uint8_t  m_VKey;
   wchar_t  m_wUnicode;
   char     m_cAscii;
   uint32_t m_Modifiers;

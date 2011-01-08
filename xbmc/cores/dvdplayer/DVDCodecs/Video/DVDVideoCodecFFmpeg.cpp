@@ -451,7 +451,13 @@ int CDVDVideoCodecFFmpeg::Decode(BYTE* pData, int iSize, double dts, double pts)
     // convert the picture
     struct SwsContext *context = m_dllSwScale.sws_getContext(m_pCodecContext->width, m_pCodecContext->height,
                                          m_pCodecContext->pix_fmt, m_pCodecContext->width, m_pCodecContext->height,
-                                         PIX_FMT_YUV420P, SWS_FAST_BILINEAR, NULL, NULL, NULL);
+                                         PIX_FMT_YUV420P, SWS_FAST_BILINEAR | SwScaleCPUFlags(), NULL, NULL, NULL);
+
+    if(context == NULL)
+    {
+      CLog::Log(LOGERROR, "CDVDVideoCodecFFmpeg::Decode - unable to obtain sws context for w:%i, h:%i, pixfmt: %i", m_pCodecContext->width, m_pCodecContext->height, m_pCodecContext->pix_fmt);
+      return VC_ERROR;
+    }
 
     if(context == NULL)
     {

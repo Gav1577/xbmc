@@ -94,11 +94,11 @@ prepare_orig_tarball() {
     cd ..
 
     if [ -z "$PPA_ORIG_TARBALL" ]; then
-    # Remove non-free components
-    echo "Removing non-free components"
-    rm -rf xbmc-$XBMC_VERSION/xbmc/cores/dvdplayer/Codecs/libdvd/libdvdcss
-    rm -rf xbmc-$XBMC_VERSION/xbmc/xbmc/lib/UnrarXLib
-    rm -rf xbmc-$XBMC_VERSION/xbmc/xbmc/lib/libXBMS
+        # Remove non-free components
+        echo "Removing non-free components"
+        rm -rf xbmc-$XBMC_VERSION/xbmc/cores/dvdplayer/Codecs/libdvd/libdvdcss
+        rm -rf xbmc-$XBMC_VERSION/xbmc/xbmc/lib/UnrarXLib
+        rm -rf xbmc-$XBMC_VERSION/xbmc/xbmc/lib/libXBMS
 
         # Remove components not needed for Linux when using external libs
         echo "Removing components not needed for Linux when using external libs"

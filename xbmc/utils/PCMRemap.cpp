@@ -460,11 +460,11 @@ enum PCMChannels *CPCMRemap::SetInputFormat(unsigned int channels, enum PCMChann
       ResolveChannels(); /* Do basic channel resolving to find out the empty channels;
                           * If m_outSet == true, this was done already by BuildMap() above */
     int i = 0;
-      for (enum PCMChannels *chan = PCMLayoutMap[m_channelLayout]; *chan != PCM_INVALID; ++chan)
+    for (enum PCMChannels *chan = PCMLayoutMap[m_channelLayout]; *chan != PCM_INVALID; ++chan)
       if (m_lookupMap[*chan][0].channel != PCM_INVALID) {
         /* something is mapped here, so add the channel */
-          m_layoutMap[i++] = *chan;
-        }
+        m_layoutMap[i++] = *chan;
+      }
     m_layoutMap[i] = PCM_INVALID;
   } else
     memcpy(m_layoutMap, PCMLayoutMap[m_channelLayout], sizeof(PCMLayoutMap[m_channelLayout]));

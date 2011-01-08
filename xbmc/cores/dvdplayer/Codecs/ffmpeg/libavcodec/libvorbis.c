@@ -155,7 +155,7 @@ static int oggvorbis_encode_frame(AVCodecContext *avccontext,
                 ff_vorbis_encoding_channel_layout_offsets[channels-1][c];
             for(l = 0 ; l < samples ; l++)
                 buffer[c][l]=audio[l*channels+co]/32768.f;
-            }
+        }
         vorbis_analysis_wrote(&context->vd, samples) ;
     } else {
         if(!context->eof)

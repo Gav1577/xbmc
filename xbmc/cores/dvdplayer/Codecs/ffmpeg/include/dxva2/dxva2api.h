@@ -286,6 +286,7 @@ typedef struct {
     UCHAR   bScalingLists8x8[2][64];
 } DXVA_Qmatrix_H264;
 
+
 typedef struct {
     UINT    BSNALunitDataLocation;
     UINT    SliceBytesInBuffer;

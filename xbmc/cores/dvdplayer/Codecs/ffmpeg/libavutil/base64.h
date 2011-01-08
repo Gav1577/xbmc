@@ -29,7 +29,7 @@
  * @param out      buffer for decoded data
  * @param in       null-terminated input string
  * @param out_size size in bytes of the out buffer, must be at
- * least 3/4 of the length of in
+ *                 least 3/4 of the length of in
  * @return         number of bytes written, or a negative value in case of
  *                 invalid input
  */

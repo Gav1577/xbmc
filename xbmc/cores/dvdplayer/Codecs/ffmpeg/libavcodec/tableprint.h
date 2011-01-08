@@ -63,11 +63,11 @@ void write_int8_t_array     (const int8_t   *, int);
 void write_uint8_t_array    (const uint8_t  *, int);
 void write_uint16_t_array   (const uint16_t *, int);
 void write_uint32_t_array   (const uint32_t *, int);
-void write_float_array    (const float    *, int);
+void write_float_array      (const float    *, int);
 void write_int8_t_2d_array  (const void *, int, int);
 void write_uint8_t_2d_array (const void *, int, int);
 void write_uint32_t_2d_array(const void *, int, int);
-void write_float_2d_array (const void *, int, int);
+void write_float_2d_array   (const void *, int, int);
 /** \} */ // end of printfuncs group
 
 /** Write a standard file header */

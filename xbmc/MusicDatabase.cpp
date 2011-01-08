@@ -2403,27 +2403,27 @@ void CMusicDatabase::DeleteCDDBInfo()
         continue;
 
       CStdString strFile = CUtil::GetFileName(items[i]->m_strPath);
-        strFile.Delete(strFile.size() - 5, 5);
-        ULONG lDiscId = strtoul(strFile.c_str(), NULL, 16);
-        Xcddb cddb;
-        cddb.setCacheDir(g_settings.GetCDDBFolder());
+      strFile.Delete(strFile.size() - 5, 5);
+      ULONG lDiscId = strtoul(strFile.c_str(), NULL, 16);
+      Xcddb cddb;
+      cddb.setCacheDir(g_settings.GetCDDBFolder());
 
-        if (!cddb.queryCache(lDiscId))
-          continue;
+      if (!cddb.queryCache(lDiscId))
+        continue;
 
-        CStdString strDiskTitle, strDiskArtist;
-        cddb.getDiskTitle(strDiskTitle);
-        cddb.getDiskArtist(strDiskArtist);
+      CStdString strDiskTitle, strDiskArtist;
+      cddb.getDiskTitle(strDiskTitle);
+      cddb.getDiskArtist(strDiskArtist);
 
-        CStdString str;
-        if (strDiskArtist.IsEmpty())
-          str = strDiskTitle;
-        else
-          str = strDiskTitle + " - " + strDiskArtist;
+      CStdString str;
+      if (strDiskArtist.IsEmpty())
+        str = strDiskTitle;
+      else
+        str = strDiskTitle + " - " + strDiskArtist;
 
-        pDlg->Add(str);
-        mapCDDBIds.insert(pair<ULONG, CStdString>(lDiscId, str));
-      }
+      pDlg->Add(str);
+      mapCDDBIds.insert(pair<ULONG, CStdString>(lDiscId, str));
+    }
 
     pDlg->Sort();
     pDlg->DoModal();

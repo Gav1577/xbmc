@@ -84,8 +84,8 @@ bool CSaveFileStateJob::DoWork()
             msgItem->m_strPath = m_item.GetProperty("original_listitem_url");
           CGUIMessage message(GUI_MSG_NOTIFY_ALL, g_windowManager.GetActiveWindow(), 0, GUI_MSG_UPDATE_ITEM, 1, msgItem); // 1 to update the listing as well
           g_windowManager.SendThreadMessage(message);
+        }
       }
-    }
     }
 
     if (m_item.IsAudio())

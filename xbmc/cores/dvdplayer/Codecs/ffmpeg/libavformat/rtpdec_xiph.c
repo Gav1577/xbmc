@@ -351,7 +351,7 @@ static int xiph_parse_sdp_line(AVFormatContext *s, int st_index,
     if (av_strstart(line, "fmtp:", &p)) {
         return ff_parse_fmtp(s->streams[st_index], data, p,
                              xiph_parse_fmtp_pair);
-        }
+    }
 
     return 0;
 }

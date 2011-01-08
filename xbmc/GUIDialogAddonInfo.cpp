@@ -304,3 +304,4 @@ void CGUIDialogAddonInfo::OnJobComplete(unsigned int jobID, bool success,
   CGUIMessage msg(GUI_MSG_NOTIFY_ALL, WINDOW_DIALOG_TEXT_VIEWER, 0, GUI_MSG_UPDATE);
   g_windowManager.SendThreadMessage(msg);
 }
+

@@ -2749,7 +2749,7 @@ static int http_receive_data(HTTPContext *c)
                 AVStream *fst = feed->streams[i];
                 AVStream *st = s->streams[i];
                 avcodec_copy_context(fst->codec, st->codec);
-                }
+            }
 
             av_close_input_stream(s);
             av_free(pb);

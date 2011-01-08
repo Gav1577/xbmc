@@ -52,9 +52,9 @@ CPluginSource::CPluginSource(const cp_extension_t *ext)
 
 void CPluginSource::SetProvides(const CStdString &content)
 {
-    vector<CStdString> provides;
+  vector<CStdString> provides;
   if (!content.IsEmpty())
-    {
+  {
     StringUtils::SplitString(content, " ", provides);
     for (unsigned int i = 0; i < provides.size(); ++i)
     {
@@ -63,8 +63,8 @@ void CPluginSource::SetProvides(const CStdString &content)
         m_providedContent.insert(content);
     }
   }
-    if (Type() == ADDON_SCRIPT && m_providedContent.empty())
-      m_providedContent.insert(EXECUTABLE);
+  if (Type() == ADDON_SCRIPT && m_providedContent.empty())
+    m_providedContent.insert(EXECUTABLE);
 }
 
 CPluginSource::Content CPluginSource::Translate(const CStdString &content)

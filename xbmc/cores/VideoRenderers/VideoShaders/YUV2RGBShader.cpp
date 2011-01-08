@@ -338,7 +338,7 @@ YUV2RGBProgressiveShaderARB::YUV2RGBProgressiveShaderARB(bool rect, unsigned fla
   {
     if(rect)
       shaderfile = "yuv2rgb_basic_rect_UYVY.arb";
-  else
+    else
       shaderfile = "yuv2rgb_basic_2d_UYVY.arb";
   }
   else

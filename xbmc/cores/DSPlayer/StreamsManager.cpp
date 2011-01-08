@@ -498,10 +498,10 @@ void CStreamsManager::LoadStreams()
   /* We're done, internal audio & subtitles stream are loaded.
      We load external subtitle file */
 
-  std::vector<std::string> subtitles;
-  CDVDFactorySubtitle::GetSubtitles(subtitles, CDSPlayer::currentFileItem.m_strPath);
+  std::vector<CStdString> subtitles;
+  CUtil::ScanForExternalSubtitles( CDSPlayer::currentFileItem.m_strPath, subtitles );
 
-  for (std::vector<std::string>::const_iterator it = subtitles.begin(); it != subtitles.end(); ++it)
+  for (std::vector<CStdString>::const_iterator it = subtitles.begin(); it != subtitles.end(); ++it)
   {
     SubtitleManager->AddSubtitle(*it);
   }

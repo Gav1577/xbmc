@@ -533,7 +533,7 @@ namespace PYXBMC
   {
     CGUIDialogProgress* pDialog= ((DialogProgress*)self)->dlg;
     if(pDialog)
-    pDialog->Close();
+      pDialog->Close();
 
     self->ob_type->tp_free((PyObject*)self);
   }

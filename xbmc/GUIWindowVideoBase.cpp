@@ -187,7 +187,7 @@ bool CGUIWindowVideoBase::OnMessage(CGUIMessage& message)
         else if (iAction == ACTION_SHOW_INFO)
         {
           return OnInfo(iItem);
-            }
+        }
         else if (iAction == ACTION_PLAYER_PLAY && !g_application.IsPlayingVideo())
         {
           return OnResumeItem(iItem);
@@ -846,7 +846,7 @@ int  CGUIWindowVideoBase::GetResumeItemOffset(const CFileItem *item)
 
 bool CGUIWindowVideoBase::OnClick(int iItem)
 {
-    return CGUIMediaWindow::OnClick(iItem);
+  return CGUIMediaWindow::OnClick(iItem);
 }
 
 bool CGUIWindowVideoBase::OnSelect(int iItem)
@@ -890,7 +890,7 @@ bool CGUIWindowVideoBase::OnFileAction(int iItem, int action)
       choices.Add(SELECT_ACTION_MORE, 22082); // More
       int value = CGUIDialogContextMenu::ShowAndGetChoice(choices);
       if (value < 0)
-  return true;
+        return true;
 
       return OnFileAction(iItem, value);
     }
@@ -966,14 +966,14 @@ void CGUIWindowVideoBase::OnRestartItem(int iItem)
 CStdString CGUIWindowVideoBase::GetResumeString(CFileItem item) 
 {
   CStdString resumeString;
-    CVideoDatabase db;
-    if (db.Open())
-    {
-      CBookmark bookmark;
-      CStdString itemPath(item.m_strPath);
-      if (item.IsVideoDb())
-        itemPath = item.GetVideoInfoTag()->m_strFileNameAndPath;
-      if (db.GetResumeBookMark(itemPath, bookmark) )
+  CVideoDatabase db;
+  if (db.Open())
+  {
+    CBookmark bookmark;
+    CStdString itemPath(item.m_strPath);
+    if (item.IsVideoDb())
+      itemPath = item.GetVideoInfoTag()->m_strFileNameAndPath;
+    if (db.GetResumeBookMark(itemPath, bookmark) )
       resumeString.Format(g_localizeStrings.Get(12022).c_str(), StringUtils::SecondsToTimeString(lrint(bookmark.timeInSeconds)).c_str());
     db.Close();
   }
@@ -986,17 +986,17 @@ bool CGUIWindowVideoBase::ShowResumeMenu(CFileItem &item)
   {
     CStdString resumeString = GetResumeString(item);
     if (!resumeString.IsEmpty())
-      { // prompt user whether they wish to resume
+    { // prompt user whether they wish to resume
       CContextButtons choices;
       choices.Add(1, resumeString);
       choices.Add(2, 12021); // start from the beginning
-        int retVal = CGUIDialogContextMenu::ShowAndGetChoice(choices);
+      int retVal = CGUIDialogContextMenu::ShowAndGetChoice(choices);
       if (retVal < 0)
-          return false; // don't do anything
+        return false; // don't do anything
       if (retVal == 1)
         item.m_lStartOffset = STARTOFFSET_RESUME;
-      }
     }
+  }
   return true;
 }
 

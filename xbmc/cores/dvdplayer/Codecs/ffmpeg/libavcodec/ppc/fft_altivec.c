@@ -95,7 +95,7 @@ static void ff_imdct_half_altivec(FFTContext *s, FFTSample *output, const FFTSam
     /* post rotation + reordering */
     j = -n32;
     k = n32-1;
-        do {
+    do {
         vec_f cos,sin,re,im,a,b,c,d;
 #define CMULB(d0,d1,o)\
         re = pout[o*2];\

@@ -254,7 +254,7 @@ PLAYERCOREID CPlayerCoreFactory::SelectPlayerDialog(VECPLAYERCORES &vecCores, fl
     int choice = CGUIDialogContextMenu::ShowAndGetChoice(choices);
     if (choice >= 0)
       return vecCores[choice];
-    }
+  }
   return EPC_NONE;
 }
 

@@ -48,7 +48,7 @@ void ff_acelp_reorder_lsf(int16_t* lsfq, int lsfq_min_distance, int lsfq_min, in
  *
  * @param lsf            [in,out] LSFs in Hertz
  * @param min_spacing    minimum distance between two consecutive lsf values
- * @param                size size of the lsf vector
+ * @param size           size of the lsf vector
  */
 void ff_set_min_dist_lsf(float *lsf, double min_spacing, int size);
 

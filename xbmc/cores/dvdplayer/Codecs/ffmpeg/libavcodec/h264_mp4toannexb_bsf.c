@@ -29,8 +29,8 @@ typedef struct H264BSFContext {
 } H264BSFContext;
 
 static int alloc_and_copy(uint8_t **poutbuf,          int *poutbuf_size,
-                           const uint8_t *sps_pps, uint32_t sps_pps_size,
-                           const uint8_t *in,      uint32_t in_size) {
+                          const uint8_t *sps_pps, uint32_t sps_pps_size,
+                          const uint8_t *in,      uint32_t in_size) {
     uint32_t offset = *poutbuf_size;
     uint8_t nal_header_size = offset ? 3 : 4;
     void *tmp;
@@ -118,7 +118,7 @@ static int h264_mp4toannexb_filter(AVBitStreamFilterContext *bsfc,
         av_free(avctx->extradata);
         avctx->extradata      = out;
         avctx->extradata_size = total_size;
-        ctx->first_idr = 1;
+        ctx->first_idr        = 1;
         ctx->extradata_parsed = 1;
     }
 
@@ -150,7 +150,7 @@ static int h264_mp4toannexb_filter(AVBitStreamFilterContext *bsfc,
             ctx->first_idr = 0;
         } else {
             if (alloc_and_copy(poutbuf, poutbuf_size,
-                           NULL, 0,
+                               NULL, 0,
                                buf, nal_size) < 0)
                 goto fail;
             if (!ctx->first_idr && unit_type == 1)

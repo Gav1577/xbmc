@@ -231,7 +231,7 @@ static int mov_read_chpl(MOVContext *c, ByteIOContext *pb, MOVAtom atom)
     version = get_byte(pb);
     get_be24(pb);
     if (version)
-    get_be32(pb); // ???
+        get_be32(pb); // ???
     nb_chapters = get_byte(pb);
 
     for (i = 0; i < nb_chapters; i++) {

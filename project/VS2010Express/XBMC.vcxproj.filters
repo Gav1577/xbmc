@@ -2187,6 +2187,12 @@
     <ClCompile Include="..\..\xbmc\addons\Repository.cpp">
       <Filter>Source Files\Addons</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\addons\Skin.cpp">
+      <Filter>Source Files\Addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\GUIDialogAddonInfo.cpp">
+      <Filter>Source Files\GUI Dialog</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogTextViewer.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
@@ -2324,6 +2330,15 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\addons\Service.cpp">
       <Filter>Source Files\Addons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\FileSystem\FileUDF.cpp">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\FileSystem\udf25.cpp">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\FileSystem\UDFDirectory.cpp">
+      <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2599,6 +2614,30 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDInputStreams\DVDStateSerializer.h">
       <Filter>cores\dvdplayer\DVDInputStreams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\Codecs\DllAvCodec.h">
+      <Filter>cores\dvdplayer\DVDHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\Codecs\DllAvFormat.h">
+      <Filter>cores\dvdplayer\DVDHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\Codecs\DllPostProc.h">
+      <Filter>cores\dvdplayer\DVDHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\Codecs\DllSwScale.h">
+      <Filter>cores\dvdplayer\DVDHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include\libavutil\avconfig.h">
+      <Filter>cores\dvdplayer\DVDHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\libavformat\avformat.h">
+      <Filter>cores\dvdplayer\DVDHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\libavutil\common.h">
+      <Filter>cores\dvdplayer\DVDHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\libavformat\avio.h">
+      <Filter>cores\dvdplayer\DVDHeaders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDInputStreams\dvdnav\dvd_types.h">
       <Filter>cores\dvdplayer\DVDHeaders</Filter>
@@ -4703,6 +4742,12 @@
     <ClInclude Include="..\..\xbmc\addons\Repository.h">
       <Filter>Source Files\Addons</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\addons\Skin.h">
+      <Filter>Source Files\Addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\GUIDialogAddonInfo.h">
+      <Filter>Source Files\GUI Dialog</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogTextViewer.h">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
@@ -4787,6 +4832,9 @@
     <ClInclude Include="..\..\xbmc\addons\Service.h">
       <Filter>Source Files\Addons</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\FileSystem\FileUDF.h">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\DSPlayer\Utils\AudioEnumerator.h">
       <Filter>cores\dsplayer\Utils</Filter>
     </ClInclude>
@@ -4850,8 +4898,14 @@
     <ClInclude Include="..\..\xbmc\cores\DSPlayer\Filters\Splitters\StreamInfo.h">
       <Filter>cores\dsplayer\Filters\Splitters\XBMC</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\FileSystem\udf25.h">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\DSPlayer\Filters\DsVideoDecoder\dxva2_wrapper.h">
       <Filter>cores\dsplayer\Filters\Video Decoders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\FileSystem\UDFDirectory.h">
+      <Filter>Source Files\Filesystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\DSPlayer\ShadersSelectionRule.h">
       <Filter>cores\dsplayer\Shaders</Filter>

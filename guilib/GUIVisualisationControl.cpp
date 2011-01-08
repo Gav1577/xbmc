@@ -100,14 +100,14 @@ void CGUIVisualisationControl::Render()
 
     if (!m_addon && !m_bAttemptedLoad)
     {
-    AddonPtr viz;
-    if (ADDON::CAddonMgr::Get().GetDefault(ADDON_VIZ, viz))
-      LoadAddon(viz);
+      AddonPtr viz;
+      if (ADDON::CAddonMgr::Get().GetDefault(ADDON_VIZ, viz))
+        LoadAddon(viz);
 
-    m_bAttemptedLoad = true;
+      m_bAttemptedLoad = true;
+    }
   }
-  }
-    CGUIRenderingControl::Render();
+  CGUIRenderingControl::Render();
 }
 
 void CGUIVisualisationControl::FreeResources(bool immediately)

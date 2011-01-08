@@ -1006,16 +1006,16 @@ void CGUIWindowFileManager::OnPopupMenu(int list, int item, bool bContextDriven 
   }
   // popup the context menu
 
-    bool showEntry = false;
-    if (item >= m_vecItems[list]->Size()) item = -1;
-    if (item >= 0)
-      showEntry=(!pItem->IsParentFolder() || (pItem->IsParentFolder() && m_vecItems[list]->GetSelectedCount()>0));
+  bool showEntry = false;
+  if (item >= m_vecItems[list]->Size()) item = -1;
+  if (item >= 0)
+    showEntry=(!pItem->IsParentFolder() || (pItem->IsParentFolder() && m_vecItems[list]->GetSelectedCount()>0));
 
     // determine available players
     VECPLAYERCORES vecCores;
     CPlayerCoreFactory::GetPlayers(*pItem, vecCores);
 
-    // add the needed buttons
+  // add the needed buttons
   CContextButtons choices;
   if (item >= 0)
   {
@@ -1043,85 +1043,85 @@ void CGUIWindowFileManager::OnPopupMenu(int list, int item, bool bContextDriven 
 
   int btnid = CGUIDialogContextMenu::ShowAndGetChoice(choices);
   if (btnid == 1)
-    {
-      OnSelectAll(list);
-      bDeselect=false;
-    }
+  {
+    OnSelectAll(list);
+    bDeselect=false;
+  }
   if (btnid == 2)
-    {
-      CFavourites::AddOrRemove(pItem.get(), GetID());
-      return;
-    }
+  {
+    CFavourites::AddOrRemove(pItem.get(), GetID());
+    return;
+  }
   if (btnid == 3)
-    {
-      VECPLAYERCORES vecCores;
-      CPlayerCoreFactory::GetPlayers(*pItem, vecCores);
-      g_application.m_eForcedNextPlayer = CPlayerCoreFactory::SelectPlayerDialog(vecCores);
-      if (g_application.m_eForcedNextPlayer != EPC_NONE)
-        OnStart(pItem.get());
-    }
+  {
+    VECPLAYERCORES vecCores;
+    CPlayerCoreFactory::GetPlayers(*pItem, vecCores);
+    g_application.m_eForcedNextPlayer = CPlayerCoreFactory::SelectPlayerDialog(vecCores);
+    if (g_application.m_eForcedNextPlayer != EPC_NONE)
+      OnStart(pItem.get());
+  }
   if (btnid == 4)
-      OnRename(list);
+    OnRename(list);
   if (btnid == 5)
-      OnDelete(list);
+    OnDelete(list);
   if (btnid == 6)
-      OnCopy(list);
+    OnCopy(list);
   if (btnid == 7)
-      OnMove(list);
+    OnMove(list);
   if (btnid == 8)
-      OnNewFolder(list);
+    OnNewFolder(list);
   if (btnid == 9)
+  {
+    // setup the progress dialog, and show it
+    CGUIDialogProgress *progress = (CGUIDialogProgress *)g_windowManager.GetWindow(WINDOW_DIALOG_PROGRESS);
+    if (progress)
     {
-      // setup the progress dialog, and show it
-      CGUIDialogProgress *progress = (CGUIDialogProgress *)g_windowManager.GetWindow(WINDOW_DIALOG_PROGRESS);
-      if (progress)
-      {
-        progress->SetHeading(13394);
-        for (int i=0; i < 3; i++)
-          progress->SetLine(i, "");
-        progress->StartModal();
-      }
+      progress->SetHeading(13394);
+      for (int i=0; i < 3; i++)
+        progress->SetLine(i, "");
+      progress->StartModal();
+    }
 
-      //  Calculate folder size for each selected item
-      for (int i=0; i<m_vecItems[list]->Size(); ++i)
+    //  Calculate folder size for each selected item
+    for (int i=0; i<m_vecItems[list]->Size(); ++i)
+    {
+      CFileItemPtr pItem2=m_vecItems[list]->Get(i);
+      if (pItem2->m_bIsFolder && pItem2->IsSelected())
       {
-        CFileItemPtr pItem2=m_vecItems[list]->Get(i);
-        if (pItem2->m_bIsFolder && pItem2->IsSelected())
+        int64_t folderSize = CalculateFolderSize(pItem2->m_strPath, progress);
+        if (folderSize >= 0)
         {
-          int64_t folderSize = CalculateFolderSize(pItem2->m_strPath, progress);
-          if (folderSize >= 0)
-          {
-            pItem2->m_dwSize = folderSize;
-            if (folderSize == 0)
-              pItem2->SetLabel2(StringUtils::SizeToString(folderSize));
-            else
-              pItem2->SetFileSizeLabel();
-          }
+          pItem2->m_dwSize = folderSize;
+          if (folderSize == 0)
+            pItem2->SetLabel2(StringUtils::SizeToString(folderSize));
+          else
+            pItem2->SetFileSizeLabel();
         }
       }
-      if (progress)
-        progress->Close();
     }
+    if (progress)
+      progress->Close();
+  }
   if (btnid == 10)
-    {
-      g_windowManager.ActivateWindow(WINDOW_SETTINGS_MENU);
-      return;
-    }
+  {
+    g_windowManager.ActivateWindow(WINDOW_SETTINGS_MENU);
+    return;
+  }
   if (btnid == 11)
-    {
-      Update(list,"");
-      return;
-    }
+  {
+    Update(list,"");
+    return;
+  }
   if (btnid == 12)
-    {
-      CGUIDialogContextMenu::SwitchMedia("files", m_vecItems[list]->m_strPath);
-      return;
-    }
+  {
+    CGUIDialogContextMenu::SwitchMedia("files", m_vecItems[list]->m_strPath);
+    return;
+  }
 
-    if (bDeselect && item >= 0 && item < m_vecItems[list]->Size())
-    { // deselect item as we didn't do anything
-      pItem->Select(false);
-    }
+  if (bDeselect && item >= 0 && item < m_vecItems[list]->Size())
+  { // deselect item as we didn't do anything
+    pItem->Select(false);
+  }
 }
 
 // Highlights the item in the list under the cursor

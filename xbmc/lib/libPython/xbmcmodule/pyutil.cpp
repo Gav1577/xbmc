@@ -60,8 +60,8 @@ namespace PYXBMC
       {
         buf = PyString_AsString(utf8_pyString);
         Py_DECREF(utf8_pyString);
-      return 1;
-    }
+        return 1;
+      }
     }
     if (PyString_Check(pObject))
     {

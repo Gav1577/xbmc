@@ -756,7 +756,7 @@ cp_log_severity_t clog_to_cp(int lvl)
 {
   if (lvl >= LOG_LEVEL_DEBUG)
     return CP_LOG_INFO;
-    return CP_LOG_ERROR;
+  return CP_LOG_ERROR;
 }
 
 void cp_fatalErrorHandler(const char *msg)

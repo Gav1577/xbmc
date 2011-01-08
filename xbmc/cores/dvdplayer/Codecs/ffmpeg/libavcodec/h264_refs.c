@@ -693,8 +693,8 @@ int ff_h264_decode_ref_pic_marking(H264Context *h, GetBitContext *gb){
             h->mmco_index= i;
         }else{
             ff_generate_sliding_window_mmcos(h);
-                }
-            }
+        }
+    }
 
     return 0;
 }

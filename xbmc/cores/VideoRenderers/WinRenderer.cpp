@@ -191,10 +191,10 @@ bool CWinRenderer::Configure(unsigned int width, unsigned int height, unsigned i
   if(m_sourceWidth  != width
   || m_sourceHeight != height)
   {
-    m_sourceWidth = width;
-    m_sourceHeight = height;
+    m_sourceWidth       = width;
+    m_sourceHeight      = height;
     // need to recreate textures
-    m_NumYV12Buffers = 0;
+    m_NumYV12Buffers    = 0;
     m_iYV12RenderBuffer = 0;
   }
 
@@ -580,12 +580,12 @@ void CWinRenderer::UpdatePSVideoFilter()
 
 void CWinRenderer::UpdateVideoFilter()
 {
-  if (m_scalingMethodGui == g_settings.m_currentVideoSettings.GetDVDPlayerScalingMethod() && m_bFilterInitialized)
+  if (m_scalingMethodGui == g_settings.m_currentVideoSettings.m_ScalingMethod && m_bFilterInitialized)
     return;
 
   m_bFilterInitialized = true;
 
-  m_scalingMethodGui = g_settings.m_currentVideoSettings.GetDVDPlayerScalingMethod();
+  m_scalingMethodGui = (ESCALINGMETHOD) g_settings.m_currentVideoSettings.m_ScalingMethod;
   m_scalingMethod    = m_scalingMethodGui;
 
   if (!Supports(m_scalingMethod))
@@ -869,9 +869,9 @@ void CWinRenderer::Stage1(DWORD flags)
   if (!m_bUseHQScaler)
   {
       m_colorShader->Render(m_sourceRect, m_destRect,
-                              g_settings.m_currentVideoSettings.m_Contrast,
-                              g_settings.m_currentVideoSettings.m_Brightness,
-                              m_flags,
+                            g_settings.m_currentVideoSettings.m_Contrast,
+                            g_settings.m_currentVideoSettings.m_Brightness,
+                            m_flags,
                             (YUVBuffer*)m_VideoBuffers[m_iYV12RenderBuffer]);
   }
   else
@@ -887,9 +887,9 @@ void CWinRenderer::Stage1(DWORD flags)
     CRect rtRect(0.0f, 0.0f, m_sourceWidth, m_sourceHeight);
 
     m_colorShader->Render(srcRect, rtRect,
-                                g_settings.m_currentVideoSettings.m_Contrast,
-                                g_settings.m_currentVideoSettings.m_Brightness,
-                                m_flags,
+                          g_settings.m_currentVideoSettings.m_Contrast,
+                          g_settings.m_currentVideoSettings.m_Brightness,
+                          m_flags,
                           (YUVBuffer*)m_VideoBuffers[m_iYV12RenderBuffer]);
 
     // Restore the render target
@@ -989,10 +989,10 @@ bool CWinRenderer::CreateYV12Texture(int index)
     YUVBuffer *buf = new YUVBuffer();
 
     if (!buf->Create(m_sourceWidth, m_sourceHeight))
-  {
+    {
       CLog::Log(LOGERROR, __FUNCTION__" - Unable to create YV12 video texture %i", index);
-    return false;
-  }
+      return false;
+    }
     m_VideoBuffers[index] = buf;
   }
 
@@ -1052,22 +1052,22 @@ bool CWinRenderer::Supports(ESCALINGMETHOD method)
         return true;
 
     if(m_deviceCaps.PixelShaderVersion >= D3DPS_VERSION(3, 0))
-  {
+    {
       if(method == VS_SCALINGMETHOD_CUBIC
-    || method == VS_SCALINGMETHOD_LANCZOS2
+      || method == VS_SCALINGMETHOD_LANCZOS2
       || method == VS_SCALINGMETHOD_LANCZOS3_FAST)
-      return true;
+        return true;
 
-    //lanczos3 is only allowed through advancedsettings.xml because it's very slow
-    if (g_advancedSettings.m_videoAllowLanczos3 && method == VS_SCALINGMETHOD_LANCZOS3)
-      return true;
-  }
+      //lanczos3 is only allowed through advancedsettings.xml because it's very slow
+      if (g_advancedSettings.m_videoAllowLanczos3 && method == VS_SCALINGMETHOD_LANCZOS3)
+        return true;
+    }
   }
   else if(m_renderMethod == RENDER_SW)
   {
     if(method == VS_SCALINGMETHOD_AUTO
     || method == VS_SCALINGMETHOD_NEAREST)
-    return true;
+      return true;
     if(method == VS_SCALINGMETHOD_LINEAR
     && m_deviceCaps.TextureFilterCaps & D3DPTFILTERCAPS_MINFLINEAR
     && m_deviceCaps.TextureFilterCaps & D3DPTFILTERCAPS_MAGFLINEAR)

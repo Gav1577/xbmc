@@ -217,7 +217,7 @@ static inline int vp56_rac_get_prob(VP56RangeCoder *c, uint8_t prob)
     if(bits >= 0 && c->buffer < c->end) {
         code_word |= *c->buffer++ << bits;
         bits -= 8;
-        }
+    }
     c->bits = bits;
     c->code_word = code_word;
     return bit;

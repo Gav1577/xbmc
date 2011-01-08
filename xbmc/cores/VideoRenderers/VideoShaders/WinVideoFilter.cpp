@@ -225,9 +225,9 @@ bool CYUV2RGBShader::Create(bool singlepass, unsigned int sourceWidth, unsigned 
 }
 
 void CYUV2RGBShader::Render(CRect sourceRect, CRect destRect,
-                               float contrast,
-                               float brightness,
-                               unsigned int flags,
+                            float contrast,
+                            float brightness,
+                            unsigned int flags,
                             YUVBuffer* YUVbuf)
 {
   PrepareParameters(sourceRect, destRect,
@@ -238,10 +238,10 @@ void CYUV2RGBShader::Render(CRect sourceRect, CRect destRect,
 }
 
 void CYUV2RGBShader::PrepareParameters(CRect sourceRect,
-                               CRect destRect,
-                               float contrast,
-                               float brightness,
-                               unsigned int flags)
+                                       CRect destRect,
+                                       float contrast,
+                                       float brightness,
+                                       unsigned int flags)
 {
   //See RGB renderer for comment on this
   #define CHROMAOFFSET_HORIZ 0.25f
@@ -254,43 +254,43 @@ void CYUV2RGBShader::PrepareParameters(CRect sourceRect,
     CUSTOMVERTEX* v;
     CWinShader::LockVertexBuffer((void**)&v);
 
-  v[0].x = destRect.x1;
-  v[0].y = destRect.y1;
+    v[0].x = destRect.x1;
+    v[0].y = destRect.y1;
     v[0].tu = sourceRect.x1 / m_sourceWidth;
     v[0].tv = sourceRect.y1 / m_sourceHeight;
     v[0].tu2 = v[0].tu3 = (sourceRect.x1 / 2.0f + CHROMAOFFSET_HORIZ) / (m_sourceWidth>>1);
     v[0].tv2 = v[0].tv3 = (sourceRect.y1 / 2.0f + CHROMAOFFSET_HORIZ) / (m_sourceHeight>>1);
 
-  v[1].x = destRect.x2;
-  v[1].y = destRect.y1;
+    v[1].x = destRect.x2;
+    v[1].y = destRect.y1;
     v[1].tu = sourceRect.x2 / m_sourceWidth;
     v[1].tv = sourceRect.y1 / m_sourceHeight;
     v[1].tu2 = v[1].tu3 = (sourceRect.x2 / 2.0f + CHROMAOFFSET_HORIZ) / (m_sourceWidth>>1);
     v[1].tv2 = v[1].tv3 = (sourceRect.y1 / 2.0f + CHROMAOFFSET_HORIZ) / (m_sourceHeight>>1);
 
-  v[2].x = destRect.x2;
-  v[2].y = destRect.y2;
+    v[2].x = destRect.x2;
+    v[2].y = destRect.y2;
     v[2].tu = sourceRect.x2 / m_sourceWidth;
     v[2].tv = sourceRect.y2 / m_sourceHeight;
     v[2].tu2 = v[2].tu3 = (sourceRect.x2 / 2.0f + CHROMAOFFSET_HORIZ) / (m_sourceWidth>>1);
     v[2].tv2 = v[2].tv3 = (sourceRect.y2 / 2.0f + CHROMAOFFSET_HORIZ) / (m_sourceHeight>>1);
 
-  v[3].x = destRect.x1;
-  v[3].y = destRect.y2;
+    v[3].x = destRect.x1;
+    v[3].y = destRect.y2;
     v[3].tu = sourceRect.x1 / m_sourceWidth;
     v[3].tv = sourceRect.y2 / m_sourceHeight;
     v[3].tu2 = v[3].tu3 = (sourceRect.x1 / 2.0f + CHROMAOFFSET_HORIZ) / (m_sourceWidth>>1);
     v[3].tv2 = v[3].tv3 = (sourceRect.y2 / 2.0f + CHROMAOFFSET_HORIZ) / (m_sourceHeight>>1);
 
-  // -0.5 offset to compensate for D3D rasterization
-  // set z and rhw
-  for(int i = 0; i < 4; i++)
-  {
-    v[i].x -= 0.5;
-    v[i].y -= 0.5;
-    v[i].z = 0.0f;
-    v[i].rhw = 1.0f;
-  }
+    // -0.5 offset to compensate for D3D rasterization
+    // set z and rhw
+    for(int i = 0; i < 4; i++)
+    {
+      v[i].x -= 0.5;
+      v[i].y -= 0.5;
+      v[i].z = 0.0f;
+      v[i].rhw = 1.0f;
+    }
     CWinShader::UnlockVertexBuffer();
   }
 
@@ -393,9 +393,9 @@ bool CConvolutionShader::Create(ESCALINGMETHOD method)
 }
 
 void CConvolutionShader::Render(CD3DTexture &sourceTexture,
-                               unsigned int sourceWidth, unsigned int sourceHeight,
-                               CRect sourceRect,
-                               CRect destRect)
+                                unsigned int sourceWidth, unsigned int sourceHeight,
+                                CRect sourceRect,
+                                CRect destRect)
 {
   PrepareParameters(sourceWidth, sourceHeight, sourceRect, destRect);
   float texSteps[] = { 1.0f/(float)sourceWidth, 1.0f/(float)sourceHeight};
@@ -472,8 +472,8 @@ bool CConvolutionShader::CreateHQKernel(ESCALINGMETHOD method)
 }
 
 void CConvolutionShader::PrepareParameters(unsigned int sourceWidth, unsigned int sourceHeight,
-                               CRect sourceRect,
-                               CRect destRect)
+                                           CRect sourceRect,
+                                           CRect destRect)
 {
   if(m_sourceWidth != sourceWidth || m_sourceHeight != sourceHeight
   || m_sourceRect != sourceRect || m_destRect != destRect)
@@ -486,35 +486,35 @@ void CConvolutionShader::PrepareParameters(unsigned int sourceWidth, unsigned in
     CUSTOMVERTEX* v;
     CWinShader::LockVertexBuffer((void**)&v);
 
-  v[0].x = destRect.x1;
-  v[0].y = destRect.y1;
-  v[0].tu = sourceRect.x1 / sourceWidth;
-  v[0].tv = sourceRect.y1 / sourceHeight;
+    v[0].x = destRect.x1;
+    v[0].y = destRect.y1;
+    v[0].tu = sourceRect.x1 / sourceWidth;
+    v[0].tv = sourceRect.y1 / sourceHeight;
 
-  v[1].x = destRect.x2;
-  v[1].y = destRect.y1;
-  v[1].tu = sourceRect.x2 / sourceWidth;
-  v[1].tv = sourceRect.y1 / sourceHeight;
+    v[1].x = destRect.x2;
+    v[1].y = destRect.y1;
+    v[1].tu = sourceRect.x2 / sourceWidth;
+    v[1].tv = sourceRect.y1 / sourceHeight;
 
-  v[2].x = destRect.x2;
-  v[2].y = destRect.y2;
-  v[2].tu = sourceRect.x2 / sourceWidth;
-  v[2].tv = sourceRect.y2 / sourceHeight;
+    v[2].x = destRect.x2;
+    v[2].y = destRect.y2;
+    v[2].tu = sourceRect.x2 / sourceWidth;
+    v[2].tv = sourceRect.y2 / sourceHeight;
 
-  v[3].x = destRect.x1;
-  v[3].y = destRect.y2;
-  v[3].tu = sourceRect.x1 / sourceWidth;
-  v[3].tv = sourceRect.y2 / sourceHeight;
+    v[3].x = destRect.x1;
+    v[3].y = destRect.y2;
+    v[3].tu = sourceRect.x1 / sourceWidth;
+    v[3].tv = sourceRect.y2 / sourceHeight;
 
-  // -0.5 offset to compensate for D3D rasterization
-  // set z and rhw
-  for(int i = 0; i < 4; i++)
-  {
-    v[i].x -= 0.5;
-    v[i].y -= 0.5;
-    v[i].z = 0.0f;
-    v[i].rhw = 1.0f;
-  }
+    // -0.5 offset to compensate for D3D rasterization
+    // set z and rhw
+    for(int i = 0; i < 4; i++)
+    {
+      v[i].x -= 0.5;
+      v[i].y -= 0.5;
+      v[i].z = 0.0f;
+      v[i].rhw = 1.0f;
+    }
 
     CWinShader::UnlockVertexBuffer();
   }

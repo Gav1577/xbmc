@@ -1065,7 +1065,7 @@ static int mp_decode_layer2(MPADecodeContext *s)
                             /* 3 values at the same time */
                             v = get_bits(&s->gb, -bits);
                             v2 = division_tabs[qindex][v];
-                            steps = ff_mpa_quant_steps[qindex];
+                            steps  = ff_mpa_quant_steps[qindex];
 
                             s->sb_samples[ch][k * 12 + l + 0][i] =
                                 l2_unscale_group(steps, v2        & 15, scale);

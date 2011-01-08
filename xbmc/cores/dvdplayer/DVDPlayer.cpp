@@ -426,7 +426,7 @@ bool CDVDPlayer::OpenInputStream()
   {
     m_filename = g_mediaManager.TranslateDevicePath("");
   }
-
+retry:
   m_pInputStream = CDVDFactoryInputStream::CreateInputStream(this, m_filename, m_mimetype);
   if(m_pInputStream == NULL)
   {
@@ -438,6 +438,19 @@ bool CDVDPlayer::OpenInputStream()
 
   if (!m_pInputStream->Open(m_filename.c_str(), m_mimetype))
   {
+      if(m_pInputStream->IsStreamType(DVDSTREAM_TYPE_DVD))
+      {
+        CLog::Log(LOGERROR, "CDVDPlayer::OpenInputStream - failed to open [%s] as DVD ISO, trying Bluray", m_filename.c_str());
+        m_mimetype = "bluray/iso";
+        filename = m_filename;
+        filename = filename + "/BDMV/index.bdmv";
+        int title = m_item.GetPropertyInt("BlurayStartingTitle");
+        if( title )
+          filename.AppendFormat("?title=%d",title);
+        
+        m_filename = filename;
+        goto retry;
+      }
     CLog::Log(LOGERROR, "CDVDPlayer::OpenInputStream - error opening [%s]", m_filename.c_str());
     return false;
   }
@@ -448,8 +461,8 @@ bool CDVDPlayer::OpenInputStream()
   &&  !m_pInputStream->IsStreamType(DVDSTREAM_TYPE_HTSP))
   {
     // find any available external subtitles
-    std::vector<std::string> filenames;
-    CDVDFactorySubtitle::GetSubtitles(filenames, m_filename);
+    std::vector<CStdString> filenames;
+    CUtil::ScanForExternalSubtitles( m_filename, filenames );
 
     // find any upnp subtitles
     CStdString key("upnp:subtitle:1");
@@ -457,7 +470,23 @@ bool CDVDPlayer::OpenInputStream()
       filenames.push_back(m_item.GetProperty(key));
 
     for(unsigned int i=0;i<filenames.size();i++)
-      AddSubtitleFile(filenames[i], i == 0 ? CDemuxStream::FLAG_DEFAULT : CDemuxStream::FLAG_NONE);
+    {
+      CLog::Log(LOGERROR, "test subs Amet [%s]", filenames[i].c_str());
+      // if vobsub subtitle:		
+      if ( CUtil::GetExtension(filenames[i]) == ".idx" ) 
+      {
+        CStdString strSubFile;
+        if ( CUtil::FindVobSubPair( filenames, filenames[i], strSubFile ) )
+          AddSubtitleFile(filenames[i], strSubFile);
+      }
+      else 
+      {
+        if ( !CUtil::IsVobSub(filenames, filenames[i] ) )
+        {
+          AddSubtitleFile(filenames[i]);
+        }
+      }   
+    } // end loop over all subtitle files    
 
     g_settings.m_currentVideoSettings.m_SubtitleCached = true;
   }
@@ -3360,13 +3389,17 @@ int CDVDPlayer::GetSourceBitrate()
 }
 
 
-int CDVDPlayer::AddSubtitleFile(const std::string& filename, CDemuxStream::EFlags flags)
+int CDVDPlayer::AddSubtitleFile(const std::string& filename, const std::string& subfilename, CDemuxStream::EFlags flags)
 {
   std::string ext = CUtil::GetExtension(filename);
+  std::string vobsubfile = subfilename;
   if(ext == ".idx")
   {
+    if (vobsubfile.empty())
+      vobsubfile = CUtil::ReplaceExtension(filename, ".sub");
+   
     CDVDDemuxVobsub v;
-    if(!v.Open(filename))
+    if(!v.Open(filename, vobsubfile))
       return -1;
     m_SelectionStreams.Update(NULL, &v);
     int index = m_SelectionStreams.IndexOf(STREAM_SUBTITLE, m_SelectionStreams.Source(STREAM_SOURCE_DEMUX_SUB, filename), 0);

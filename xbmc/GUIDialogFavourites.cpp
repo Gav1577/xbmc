@@ -110,8 +110,8 @@ void CGUIDialogFavourites::OnPopupMenu(int item)
   if (item < 0 || item >= m_favourites->Size())
     return;
 
-    // highlight the item
-    (*m_favourites)[item]->Select(true);
+  // highlight the item
+  (*m_favourites)[item]->Select(true);
 
   CContextButtons choices;
   if (m_favourites->Size() > 1)
@@ -124,17 +124,17 @@ void CGUIDialogFavourites::OnPopupMenu(int item)
   
   int button = CGUIDialogContextMenu::ShowAndGetChoice(choices);
 
-    // unhighlight the item
-    (*m_favourites)[item]->Select(false);
+  // unhighlight the item
+  (*m_favourites)[item]->Select(false);
 
   if (button == 1)
-      OnMoveItem(item, -1);
+    OnMoveItem(item, -1);
   else if (button == 2)
-      OnMoveItem(item, 1);
+    OnMoveItem(item, 1);
   else if (button == 3)
-      OnDelete(item);
+    OnDelete(item);
   else if (button == 4)
-      OnRename(item);
+    OnRename(item);
 }
 
 void CGUIDialogFavourites::OnMoveItem(int item, int amount)

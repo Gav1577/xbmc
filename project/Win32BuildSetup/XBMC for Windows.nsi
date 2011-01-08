@@ -333,7 +333,7 @@ Section "DirectX Install" SEC_DIRECTX
   SectionIn 1 2 RO
 
   DetailPrint "Running DirectX Setup..."
- 
+
   SetOutPath "$TEMP\dxsetup"
   File "${xbmc_root}\..\dependencies\dxsetup\dsetup32.dll"
   File "${xbmc_root}\..\dependencies\dxsetup\DSETUP.dll"
@@ -345,7 +345,7 @@ Section "DirectX Install" SEC_DIRECTX
   ExecWait '"$TEMP\dxsetup\dxsetup.exe" /silent' $DirectXSetupError
   RMDir /r "$TEMP\dxsetup"
   SetOutPath "$INSTDIR"
- 
+
   DetailPrint "Finished DirectX Setup"
   
 SectionEnd
@@ -355,20 +355,5 @@ Section "-Check DirectX installation" SEC_DIRECTXCHECK
   IfFileExists $SYSDIR\D3DX9_43.dll +2 0
     MessageBox MB_OK|MB_ICONSTOP|MB_TOPMOST|MB_SETFOREGROUND "DirectX9 wasn't installed properly.$\nPlease download the DirectX End-User Runtime from Microsoft and install it again."
 
-SectionEnd
-
-;--------------------------------
-;Dsplayer installation section
-
-Section "ffdshow rev 3326" SEC_FFDSHOW
-  SectionIn 1 2
-  
-  SetOutPath "$TEMP"
-  File "${xbmc_root}\Xbmc\ffdshow_rev3326_20100319.exe"
-  DetailPrint "Running ffdshow installation"
-  ExecWait '"$TEMP\ffdshow_rev3326_20100319.exe" /q' $VSRedistSetupError
-  DetailPrint "Finished ffdshow installation"
- 
-  Delete "$TEMP\ffdshow_rev3326_20100319.exe"
 SectionEnd
 !endif

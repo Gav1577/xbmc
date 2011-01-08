@@ -8,8 +8,6 @@
 	<include file="ViewsLiveTV.xml" />
 	<include file="IncludesCodecFlagging.xml" />
 	<include file="IncludesHomeRecentlyAdded.xml" />
-	<include file="IncludesHomeVertical.xml" />
-	<include file="IncludesHomeHorizontal.xml" />
 	<include file="IncludesHomeMenuItems.xml" />
 
 	<constant name="FanartCrossfadeTime">500</constant>
@@ -70,7 +68,18 @@
 			<timeperimage>10000</timeperimage>
 			<randomize>true</randomize>
 			<fadetime>1000</fadetime>
-			<visible>[Container.Content(TVShows) | Container.Content(Seasons) |Container.Content(Episodes)] + [!IsEmpty(Skin.String(Home_Custom_Back_TVShow_Folder) + Skin.HasSetting(HomeMenuNoTVShowsButton)])</visible>
+			<visible>[Container.Content(TVShows) | Container.Content(Seasons) | Container.Content(Episodes)] + [!IsEmpty(Skin.String(Home_Custom_Back_TVShow_Folder) + Skin.HasSetting(HomeMenuNoTVShowsButton)])</visible>
+		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>1280</width>
+			<height>720</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<include>backgroundfade</include>
+			<fadetime>FanartCrossfadeTime</fadetime>
+			<visible>!Skin.HasSetting(HideBackGroundFanart) + !IsEmpty(ListItem.Property(Fanart_Image))</visible>
+			<include>Window_OpenClose_Animation</include>
 		</control>
 	</include>
 	<include name="CommonMusicBackground">
@@ -84,6 +93,17 @@
 			<randomize>true</randomize>
 			<fadetime>1000</fadetime>
 		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>1280</width>
+			<height>720</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<include>backgroundfade</include>
+			<fadetime>FanartCrossfadeTime</fadetime>
+			<visible>!Skin.HasSetting(HideBackGroundFanart) + !IsEmpty(ListItem.Property(Fanart_Image))</visible>
+			<include>Window_OpenClose_Animation</include>
+		</control>
 	</include>
 	<include name="CommonPictureBackground">
 		<control type="multiimage">
@@ -95,6 +115,17 @@
 			<timeperimage>10000</timeperimage>
 			<randomize>true</randomize>
 			<fadetime>1000</fadetime>
+		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>1280</width>
+			<height>720</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<include>backgroundfade</include>
+			<fadetime>FanartCrossfadeTime</fadetime>
+			<visible>!Skin.HasSetting(HideBackGroundFanart) + !IsEmpty(ListItem.Property(Fanart_Image))</visible>
+			<include>Window_OpenClose_Animation</include>
 		</control>
 	</include>
 	<include name="CommonProgramsBackground">
@@ -108,17 +139,16 @@
 			<randomize>true</randomize>
 			<fadetime>1000</fadetime>
 		</control>
-	</include>
-	<include name="CommonScriptBackground">
-		<control type="multiimage">
+		<control type="image">
 			<posx>0</posx>
 			<posy>0</posy>
 			<width>1280</width>
 			<height>720</height>
-			<imagepath fallback="special://skin/backgrounds/scripts.jpg" background="true">$INFO[Skin.String(Home_Custom_Back_Scripts_Folder)]</imagepath>
-			<timeperimage>10000</timeperimage>
-			<randomize>true</randomize>
-			<fadetime>1000</fadetime>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<include>backgroundfade</include>
+			<fadetime>FanartCrossfadeTime</fadetime>
+			<visible>!Skin.HasSetting(HideBackGroundFanart) + !IsEmpty(ListItem.Property(Fanart_Image))</visible>
+			<include>Window_OpenClose_Animation</include>
 		</control>
 	</include>
 	<include name="CommonWeatherBackground">
@@ -156,6 +186,17 @@
 			<timeperimage>10000</timeperimage>
 			<randomize>true</randomize>
 			<fadetime>1000</fadetime>
+		</control>
+		<control type="image">
+			<posx>0</posx>
+			<posy>0</posy>
+			<width>1280</width>
+			<height>720</height>
+			<texture background="true">$INFO[ListItem.Property(Fanart_Image)]</texture>
+			<include>backgroundfade</include>
+			<fadetime>FanartCrossfadeTime</fadetime>
+			<visible>!Skin.HasSetting(HideBackGroundFanart) + !IsEmpty(ListItem.Property(Fanart_Image))</visible>
+			<include>Window_OpenClose_Animation</include>
 		</control>
 	</include>
 	<include name="BehindDialogFadeOut">
@@ -210,7 +251,7 @@
 		<height>40</height>
 		<width>250</width>
 		<textoffsetx>10</textoffsetx>
-		<textwidth>235</textwidth>
+		<textwidth>200</textwidth>
 		<aligny>center</aligny>
 		<font>font13caps</font>
 		<texturefocus border="5">button-focus.png</texturefocus>

@@ -35,11 +35,11 @@ ELF     .eabi_attribute 25, \val
 .endm
 
 .macro  function name, export=0
-        .macro endfunc
+    .macro endfunc
 ELF     .size   \name, . - \name
         .endfunc
         .purgem endfunc
-        .endm
+    .endm
         .text
     .if \export
         .global EXTERN_ASM\name

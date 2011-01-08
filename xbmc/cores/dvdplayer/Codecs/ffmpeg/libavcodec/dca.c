@@ -1143,17 +1143,17 @@ static int dca_subframe_footer(DCAContext * s, int base_channel)
 
     /* presumably optional information only appears in the core? */
     if (!base_channel) {
-    if (s->timestamp)
-        get_bits(&s->gb, 32);
+        if (s->timestamp)
+            get_bits(&s->gb, 32);
 
-    if (s->aux_data)
-        aux_data_count = get_bits(&s->gb, 6);
+        if (s->aux_data)
+            aux_data_count = get_bits(&s->gb, 6);
 
-    for (i = 0; i < aux_data_count; i++)
-        get_bits(&s->gb, 8);
+        for (i = 0; i < aux_data_count; i++)
+            get_bits(&s->gb, 8);
 
-    if (s->crc_present && (s->downmix || s->dynrange))
-        get_bits(&s->gb, 16);
+        if (s->crc_present && (s->downmix || s->dynrange))
+            get_bits(&s->gb, 16);
     }
 
     return 0;
@@ -1351,8 +1351,8 @@ static int dca_decode_frame(AVCodecContext * avctx,
         if (s->xch_present && (!avctx->request_channels ||
                             avctx->request_channels > num_core_channels)) {
             avctx->channel_layout |= CH_BACK_CENTER;
-        if (s->lfe) {
-            avctx->channel_layout |= CH_LOW_FREQUENCY;
+            if (s->lfe) {
+                avctx->channel_layout |= CH_LOW_FREQUENCY;
                 s->channel_order_tab = dca_channel_reorder_lfe_xch[s->amode];
             } else {
                 s->channel_order_tab = dca_channel_reorder_nolfe_xch[s->amode];
@@ -1360,9 +1360,9 @@ static int dca_decode_frame(AVCodecContext * avctx,
         } else {
             if (s->lfe) {
                 avctx->channel_layout |= CH_LOW_FREQUENCY;
-            s->channel_order_tab = dca_channel_reorder_lfe[s->amode];
-        } else
-            s->channel_order_tab = dca_channel_reorder_nolfe[s->amode];
+                s->channel_order_tab = dca_channel_reorder_lfe[s->amode];
+            } else
+                s->channel_order_tab = dca_channel_reorder_nolfe[s->amode];
         }
 
         if (s->prim_channels > 0 &&

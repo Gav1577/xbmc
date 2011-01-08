@@ -168,11 +168,11 @@ static void vc1_loop_filter_iblk(MpegEncContext *s, int pq)
         if (s->mb_x)
             s->dsp.vc1_h_loop_filter16(s->dest[0] - 16*s->linesize, s->linesize, pq);
         s->dsp.vc1_h_loop_filter16(s->dest[0] - 16*s->linesize+8, s->linesize, pq);
-    for(j = 0; j < 2; j++){
+        for(j = 0; j < 2; j++){
             s->dsp.vc1_v_loop_filter8(s->dest[j+1], s->uvlinesize, pq);
             if (s->mb_x)
                 s->dsp.vc1_h_loop_filter8(s->dest[j+1]-8*s->uvlinesize, s->uvlinesize, pq);
-    }
+        }
     }
     s->dsp.vc1_v_loop_filter16(s->dest[0] + 8*s->linesize, s->linesize, pq);
 
@@ -2691,7 +2691,7 @@ static void vc1_decode_i_blocks(VC1Context *v)
             }
         }
         if (!v->s.loop_filter)
-        ff_draw_horiz_band(s, s->mb_y * 16, 16);
+            ff_draw_horiz_band(s, s->mb_y * 16, 16);
         else if (s->mb_y)
             ff_draw_horiz_band(s, (s->mb_y-1) * 16, 16);
 
@@ -2829,7 +2829,7 @@ static void vc1_decode_i_blocks_adv(VC1Context *v)
             }
         }
         if (!v->s.loop_filter)
-        ff_draw_horiz_band(s, s->mb_y * 16, 16);
+            ff_draw_horiz_band(s, s->mb_y * 16, 16);
         else if (s->mb_y)
             ff_draw_horiz_band(s, (s->mb_y-1) * 16, 16);
         s->first_slice_line = 0;
@@ -2935,7 +2935,7 @@ static void vc1_decode_b_blocks(VC1Context *v)
             if(v->s.loop_filter) vc1_loop_filter_iblk(s, v->pq);
         }
         if (!v->s.loop_filter)
-        ff_draw_horiz_band(s, s->mb_y * 16, 16);
+            ff_draw_horiz_band(s, s->mb_y * 16, 16);
         else if (s->mb_y)
             ff_draw_horiz_band(s, (s->mb_y-1) * 16, 16);
         s->first_slice_line = 0;

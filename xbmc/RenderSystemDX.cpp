@@ -31,7 +31,7 @@
 #include "D3DResource.h"
 #include "GUISettings.h"
 #include "AdvancedSettings.h"
-#include "SystemInfo.h"
+#include "utils/SystemInfo.h"
 #include "VideoRenderers/RenderManager.h"
 #ifdef HAS_DS_PLAYER
 #include "Filters\RendererSettings.h"

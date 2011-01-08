@@ -1967,8 +1967,8 @@ static int aac_decode_frame(AVCodecContext *avctx, void *data,
             if (!(che=get_che(ac, elem_type, elem_id))) {
                 av_log(ac->avctx, AV_LOG_ERROR, "channel element %d.%d is not allocated\n",
                        elem_type, elem_id);
-            return -1;
-        }
+                return -1;
+            }
             samples = 1024;
         }
 
@@ -2055,7 +2055,7 @@ static int aac_decode_frame(AVCodecContext *avctx, void *data,
     *data_size = data_size_tmp;
 
     if (samples)
-    ac->dsp.float_to_int16_interleave(data, (const float **)ac->output_data, samples, avctx->channels);
+        ac->dsp.float_to_int16_interleave(data, (const float **)ac->output_data, samples, avctx->channels);
 
     if (ac->output_configured)
         ac->output_configured = OC_LOCKED;

@@ -69,8 +69,8 @@ private:
   CD3DVertexBuffer m_vb;
   unsigned int     m_vbsize;
   DWORD            m_FVF;
-  unsigned int m_vertsize;
-  unsigned int m_primitivesCount;
+  unsigned int     m_vertsize;
+  unsigned int     m_primitivesCount;
 };
 
 class CYUV2RGBShader : public CWinShader
@@ -128,7 +128,7 @@ protected:
   virtual void ReleaseInternal();
 
 private:
-  CD3DTexture m_HQKernelTexture;
+  CD3DTexture   m_HQKernelTexture;
   D3DFORMAT     m_format;
   bool          m_floattex;
   bool          m_rgba;

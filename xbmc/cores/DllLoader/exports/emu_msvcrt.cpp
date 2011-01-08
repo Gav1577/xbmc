@@ -185,7 +185,7 @@ extern "C" void __stdcall update_emu_environ()
       SetEnvironmentVariable("PROXY_USER", g_guiSettings.GetString("network.httpproxyusername"));
       SetEnvironmentVariable("PROXY_PASS", g_guiSettings.GetString("network.httpproxypassword"));
 #endif
-  }
+    }
   }
   else
   {
@@ -982,6 +982,7 @@ extern "C"
       dirData->curr_index++;
       return entry;
     }
+    free(entry);
     return NULL;
   }
 
@@ -1841,8 +1842,8 @@ extern "C"
       if (pFile->Stat(&tStat) == 0)
       {
         CUtil::Stat64ToStat64i32(buffer, &tStat);
-      return 0;
-    }
+        return 0;
+      }
       return -1;
     }
     else if (!IS_STD_DESCRIPTOR(fd))

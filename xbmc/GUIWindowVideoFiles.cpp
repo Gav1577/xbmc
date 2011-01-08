@@ -400,7 +400,7 @@ void CGUIWindowVideoFiles::GetContextButtons(int itemNumber, CContextButtons &bu
         CGUIDialogVideoScan *pScanDlg = (CGUIDialogVideoScan *)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_SCAN);
         if (!pScanDlg || (pScanDlg && !pScanDlg->IsScanning()))
           if (!item->IsLiveTV() && !item->IsPlugin() && !item->IsAddonsPath())
-          buttons.Add(CONTEXT_BUTTON_SET_CONTENT, 20333);
+            buttons.Add(CONTEXT_BUTTON_SET_CONTENT, 20333);
         CVideoDatabase database;
         database.Open();
         ADDON::ScraperPtr info = database.GetScraperForPath(item->m_strPath);

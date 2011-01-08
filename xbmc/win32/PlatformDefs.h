@@ -42,6 +42,12 @@ typedef unsigned long ThreadIdentifier;
 #ifndef strcasecmp
 #define strcasecmp strcmpi
 #endif
+#ifndef strncasecmp
+#define strncasecmp strnicmp
+#endif
+
+#define INT16_MAX SHRT_MAX
+#define INT16_MIN SHRT_MIN
 
 #ifndef INT16_MAX
 #define INT16_MAX SHRT_MAX
@@ -93,6 +99,7 @@ typedef unsigned long ThreadIdentifier;
 
 extern "C" char * strptime(const char *buf, const char *fmt, struct tm *tm);
 extern "C" int strverscmp (const char *s1, const char *s2);
+extern "C" char * strcasestr(const char* haystack, const char* needle);
 
 #endif // _WIN32
 

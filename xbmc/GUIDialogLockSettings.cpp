@@ -135,49 +135,49 @@ void CGUIDialogLockSettings::OnSettingChanged(SettingInfo &setting)
     
     int choice = CGUIDialogContextMenu::ShowAndGetChoice(choices);
 
-      CStdString newPassword;
-      LockType iLockMode = LOCK_MODE_UNKNOWN;
-      bool bResult = false;
+    CStdString newPassword;
+    LockType iLockMode = LOCK_MODE_UNKNOWN;
+    bool bResult = false;
     switch(choice)
-      {
-      case 1:
-        iLockMode = LOCK_MODE_EVERYONE; //Disabled! Need check routine!!!
-        bResult = true;
-        break;
-      case 2:
-        iLockMode = LOCK_MODE_NUMERIC;
-        bResult = CGUIDialogNumeric::ShowAndVerifyNewPassword(newPassword);
-        break;
-      case 3:
-        iLockMode = LOCK_MODE_GAMEPAD;
-        bResult = CGUIDialogGamepad::ShowAndVerifyNewPassword(newPassword);
-        break;
-      case 4:
-        iLockMode = LOCK_MODE_QWERTY;
-        bResult = CGUIDialogKeyboard::ShowAndVerifyNewPassword(newPassword);
-        break;
-      default:
-        break;
-      }
-      if (bResult)
-      {
-        if (iLockMode == LOCK_MODE_EVERYONE)
-          newPassword = "-";
-        m_locks.code = newPassword;
-        if (m_locks.code == "-")
-          iLockMode = LOCK_MODE_EVERYONE;
-        m_locks.mode = iLockMode;
-        if (m_bDetails)
-          EnableDetails(m_locks.mode != LOCK_MODE_EVERYONE);
-        m_bChanged = true;
-        if (m_locks.mode != LOCK_MODE_EVERYONE)
-          setting.name.Format("%s (%s)",g_localizeStrings.Get(m_iButtonLabel).c_str(),g_localizeStrings.Get(12336+m_locks.mode).c_str());
-        else
-          setting.name.Format("%s (%s)",g_localizeStrings.Get(m_iButtonLabel).c_str(),g_localizeStrings.Get(1223).c_str());
-
-        UpdateSetting(1);
-      }
+    {
+    case 1:
+      iLockMode = LOCK_MODE_EVERYONE; //Disabled! Need check routine!!!
+      bResult = true;
+      break;
+    case 2:
+      iLockMode = LOCK_MODE_NUMERIC;
+      bResult = CGUIDialogNumeric::ShowAndVerifyNewPassword(newPassword);
+      break;
+    case 3:
+      iLockMode = LOCK_MODE_GAMEPAD;
+      bResult = CGUIDialogGamepad::ShowAndVerifyNewPassword(newPassword);
+      break;
+    case 4:
+      iLockMode = LOCK_MODE_QWERTY;
+      bResult = CGUIDialogKeyboard::ShowAndVerifyNewPassword(newPassword);
+      break;
+    default:
+      break;
     }
+    if (bResult)
+    {
+      if (iLockMode == LOCK_MODE_EVERYONE)
+        newPassword = "-";
+      m_locks.code = newPassword;
+      if (m_locks.code == "-")
+        iLockMode = LOCK_MODE_EVERYONE;
+      m_locks.mode = iLockMode;
+      if (m_bDetails)
+        EnableDetails(m_locks.mode != LOCK_MODE_EVERYONE);
+      m_bChanged = true;
+      if (m_locks.mode != LOCK_MODE_EVERYONE)
+        setting.name.Format("%s (%s)",g_localizeStrings.Get(m_iButtonLabel).c_str(),g_localizeStrings.Get(12336+m_locks.mode).c_str());
+      else
+        setting.name.Format("%s (%s)",g_localizeStrings.Get(m_iButtonLabel).c_str(),g_localizeStrings.Get(1223).c_str());
+
+      UpdateSetting(1);
+    }
+  }
   if (setting.id == 2 && m_bGetUser)
   {
     CStdString strHeading;

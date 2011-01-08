@@ -1411,18 +1411,18 @@ bool CTuxBoxUtil::GetGUIRequestedAudioChannel(AUDIOCHANNEL& sRequestedAC)
   // popup the context menu
   CContextButtons buttons;
 
-    // add the needed Audio buttons
+  // add the needed Audio buttons
   for (unsigned int i = 0; i < sCurSrvData.audio_channels.size(); ++i)
     buttons.Add(i, sCurSrvData.audio_channels[i].name);
 
   int channel = CGUIDialogContextMenu::ShowAndGetChoice(buttons);
   if (channel >= 0)
-    {
+  {
     sRequestedAC = sCurSrvData.audio_channels[channel];
     sCurSrvData.requested_audio_channel = channel;
     CLog::Log(LOGDEBUG, "%s - Audio channel %s requested.", __FUNCTION__, sRequestedAC.name.c_str());
-        return true;
-      }
+    return true;
+  }
   return false;
 }
 bool CTuxBoxUtil::GetRequestedAudioChannel(AUDIOCHANNEL& sRequestedAC)
@@ -1448,17 +1448,17 @@ bool CTuxBoxUtil::GetVideoSubChannels(CStdString& strVideoSubChannelName, CStdSt
   for (unsigned int i = 0; i < vVideoSubChannel.name.size(); ++i)
     buttons.Add(i, vVideoSubChannel.name[i]);
 
-    // get selected Video Sub Channel name and reference zap
+  // get selected Video Sub Channel name and reference zap
   int channel = CGUIDialogContextMenu::ShowAndGetChoice(buttons);
   if (channel >= 0)
-    {
+  {
     strVideoSubChannelName = vVideoSubChannel.name[channel];
     strVideoSubChannelPid = vVideoSubChannel.reference[channel];
-        vVideoSubChannel.name.clear();
-        vVideoSubChannel.reference.clear();
-        vVideoSubChannel.selected.clear();
-        return true;
-      }
+    vVideoSubChannel.name.clear();
+    vVideoSubChannel.reference.clear();
+    vVideoSubChannel.selected.clear();
+    return true;
+  }
   return false;
 }
 //Input: Service Name (Channel Namne)
@@ -1554,26 +1554,26 @@ CStdString CTuxBoxUtil::GetSubMode(int iMode, CStdString& strXMLRootString, CStd
 
   int iSubMode = CGUIDialogContextMenu::ShowAndGetChoice(choices);
   if (iSubMode == 1)
-    {
-      strXMLRootString.Format("services");
-      strXMLChildString.Format("service");
-    }
+  {
+    strXMLRootString.Format("services");
+    strXMLChildString.Format("service");
+  }
   else if (iSubMode == 2)
-    {
-      strXMLRootString.Format("satellites");
-      strXMLChildString.Format("satellite");
-    }
+  {
+    strXMLRootString.Format("satellites");
+    strXMLChildString.Format("satellite");
+  }
   else if (iSubMode == 3)
-    {
-      strXMLRootString.Format("providers");
-      strXMLChildString.Format("provider");
-    }
+  {
+    strXMLRootString.Format("providers");
+    strXMLChildString.Format("provider");
+  }
   else // if (iSubMode == 4 || iSubMode < 0)
-    {
+  {
     iSubMode = 4;
-      strXMLRootString.Format("bouquets");
-      strXMLChildString.Format("bouquet");
-    }
+    strXMLRootString.Format("bouquets");
+    strXMLChildString.Format("bouquet");
+  }
   strSubMode.Format("xml/services?mode=%i&submode=%i",iMode,iSubMode);
   return strSubMode;
 }

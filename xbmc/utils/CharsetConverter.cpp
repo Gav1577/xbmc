@@ -363,7 +363,7 @@ CStdString CCharsetConverter::getCharsetLabelByName(const CStdString& charsetNam
   {
     if (charsetName.Equals(c->charset))
       return c->caption;
-    }
+  }
 
   return "";
 }
@@ -396,7 +396,7 @@ bool CCharsetConverter::isBidiCharset(const CStdString& charset)
   {
     if (charset.Equals(c->charset))
       return true;
-    }
+  }
   return false;
 }
 
@@ -424,8 +424,8 @@ void CCharsetConverter::reset(void)
   {
     if (strCharset.Equals(c->charset))
       m_stringFribidiCharset = c->name;
-    }
   }
+}
 
 // The bVisualBiDiFlip forces a flip of characters for hebrew/arabic languages, only set to false if the flipping
 // of the string is already made or the string is not displayed in the GUI

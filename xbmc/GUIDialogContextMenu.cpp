@@ -128,7 +128,7 @@ void CGUIDialogContextMenu::SetupButtons()
 
   // update the navigation of the first and last buttons
   CGUIControl *pControl = (CGUIControl *)GetControl(BUTTON_START);
-    if (pControl)
+  if (pControl)
     pControl->SetNavigation(BUTTON_END, pControl->GetControlIdDown(), pControl->GetControlIdLeft(), pControl->GetControlIdRight());
   pControl = (CGUIControl *)GetControl(BUTTON_END);
   if (pControl)
@@ -137,12 +137,12 @@ void CGUIDialogContextMenu::SetupButtons()
   // fix up the height of the background image
   pControl = (CGUIControl *)GetControl(BACKGROUND_IMAGE);
   if (pControl)
-    {
+  {
     pControl->SetHeight(m_buttons.size() * (pButtonTemplate->GetHeight() + SPACE_BETWEEN_BUTTONS));
     CGUIControl *pControl2 = (CGUIControl *)GetControl(BACKGROUND_BOTTOM);
     if (pControl2)
       pControl2->SetPosition(pControl2->GetXPosition(), pControl->GetYPosition() + pControl->GetHeight());
-    }
+  }
 
   // update our default control
   if (m_defaultControl < BUTTON_START || m_defaultControl > BUTTON_END)
@@ -201,9 +201,9 @@ bool CGUIDialogContextMenu::SourcesMenu(const CStdString &strType, const CFileIt
   if (!item)
     return false;
 
-    // grab our context menu
-    CContextButtons buttons;
-    GetContextButtons(strType, item, buttons);
+  // grab our context menu
+  CContextButtons buttons;
+  GetContextButtons(strType, item, buttons);
 
   int button = ShowAndGetChoice(buttons);
   if (button >= 0)
@@ -672,7 +672,7 @@ int CGUIDialogContextMenu::ShowAndGetChoice(const CContextButtons &choices)
   {
     pMenu->m_buttons = choices;
     pMenu->Initialize();
-      pMenu->PositionAtCurrentFocus();
+    pMenu->PositionAtCurrentFocus();
     pMenu->DoModal();
     return pMenu->m_clickedButton;
   }

@@ -213,6 +213,6 @@ void dsputil_init_ppc(DSPContext* c, AVCodecContext *avctx)
             }
         }
 
-                }
+    }
 #endif /* HAVE_ALTIVEC */
 }

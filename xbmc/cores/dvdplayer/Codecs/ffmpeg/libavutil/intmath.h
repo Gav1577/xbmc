@@ -46,9 +46,9 @@ extern const uint32_t ff_inverse[257];
 
 #ifndef FASTDIV
 #   if CONFIG_FASTDIV
-#    define FASTDIV(a,b)   ((uint32_t)((((uint64_t)a) * ff_inverse[b]) >> 32))
+#       define FASTDIV(a,b) ((uint32_t)((((uint64_t)a) * ff_inverse[b]) >> 32))
 #   else
-#    define FASTDIV(a,b)   ((a) / (b))
+#       define FASTDIV(a,b) ((a) / (b))
 #   endif
 #endif /* FASTDIV */
 

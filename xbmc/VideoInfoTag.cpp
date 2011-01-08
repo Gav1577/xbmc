@@ -239,7 +239,7 @@ bool CVideoInfoTag::Load(const TiXmlElement *movie, bool chained /* = false */)
   // reset our details if we aren't chained.
   if (!chained) Reset();
 
-    ParseNative(movie);
+  ParseNative(movie);
 
   return true;
 }

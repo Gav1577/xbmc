@@ -1511,11 +1511,11 @@ redirect:
         }
     } else {
         /* open the tcp connection */
-    ff_url_join(tcpname, sizeof(tcpname), "tcp", NULL, host, port, NULL);
+        ff_url_join(tcpname, sizeof(tcpname), "tcp", NULL, host, port, NULL);
         if (url_open(&rt->rtsp_hd, tcpname, URL_RDWR) < 0) {
-        err = AVERROR(EIO);
-        goto fail;
-    }
+            err = AVERROR(EIO);
+            goto fail;
+        }
         rt->rtsp_hd_out = rt->rtsp_hd;
     }
     rt->seq = 0;

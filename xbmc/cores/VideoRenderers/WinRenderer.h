@@ -31,8 +31,8 @@
 #include "WinBaseRenderer.h"
 #else
 #include "D3DResource.h"
+#include "settings/VideoSettings.h"
 #endif
-
 //#define MP_DIRECTRENDERING
 
 #ifdef MP_DIRECTRENDERING
@@ -233,7 +233,7 @@ protected:
   int  m_iYV12RenderBuffer;
   int  m_NumYV12Buffers;
 
-  bool m_bConfigured;
+  bool                 m_bConfigured;
   SVideoBuffer        *m_VideoBuffers[NUM_BUFFERS];
   RenderMethod         m_renderMethod;
 
@@ -251,19 +251,19 @@ protected:
   bool                 m_bUseHQScaler;
   CD3DTexture          m_IntermediateTarget;
 
-  CYUV2RGBShader*     m_colorShader;
-  CConvolutionShader* m_scalerShader;
+  CYUV2RGBShader*      m_colorShader;
+  CConvolutionShader*  m_scalerShader;
 
-  ESCALINGMETHOD m_scalingMethod;
-  ESCALINGMETHOD m_scalingMethodGui;
+  ESCALINGMETHOD       m_scalingMethod;
+  ESCALINGMETHOD       m_scalingMethodGui;
 
   D3DCAPS9 m_deviceCaps;
 
-  bool m_bFilterInitialized;
+  bool                 m_bFilterInitialized;
 
   // clear colour for "black" bars
-  DWORD          m_clearColour;
-  unsigned int   m_flags;
+  DWORD                m_clearColour;
+  unsigned int         m_flags;
 };
 
 #else

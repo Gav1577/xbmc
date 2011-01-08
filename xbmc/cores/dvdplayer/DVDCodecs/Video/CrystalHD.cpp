@@ -864,18 +864,18 @@ bool CMPCOutputThread::GetDecoderOutput(void)
               case DVDVideoPicture::FMT_YUV420P:
                 // TODO: deinterlace for yuy2 -> yv12, icky
                 {
-            // Perform the color space conversion.
-            uint8_t* src[] =       { procOut.Ybuff, NULL, NULL, NULL };
-            int      srcStride[] = { stride*2, 0, 0, 0 };
-            uint8_t* dst[] =       { pBuffer->m_y_buffer_ptr, pBuffer->m_u_buffer_ptr, pBuffer->m_v_buffer_ptr, NULL };
-            int      dstStride[] = { pBuffer->m_width, pBuffer->m_width/2, pBuffer->m_width/2, 0 };
+                  // Perform the color space conversion.
+                  uint8_t* src[] =       { procOut.Ybuff, NULL, NULL, NULL };
+                  int      srcStride[] = { stride*2, 0, 0, 0 };
+                  uint8_t* dst[] =       { pBuffer->m_y_buffer_ptr, pBuffer->m_u_buffer_ptr, pBuffer->m_v_buffer_ptr, NULL };
+                  int      dstStride[] = { pBuffer->m_width, pBuffer->m_width/2, pBuffer->m_width/2, 0 };
 
-            m_sw_scale_ctx = m_dllSwScale->sws_getCachedContext(m_sw_scale_ctx,
-              pBuffer->m_width, pBuffer->m_height, PIX_FMT_YUYV422,
-              pBuffer->m_width, pBuffer->m_height, PIX_FMT_YUV420P,
-              SWS_FAST_BILINEAR, NULL, NULL, NULL);
-            m_dllSwScale->sws_scale(m_sw_scale_ctx, src, srcStride, 0, pBuffer->m_height, dst, dstStride);
-          }
+                  m_sw_scale_ctx = m_dllSwScale->sws_getCachedContext(m_sw_scale_ctx,
+                    pBuffer->m_width, pBuffer->m_height, PIX_FMT_YUYV422,
+                    pBuffer->m_width, pBuffer->m_height, PIX_FMT_YUV420P,
+                    SWS_FAST_BILINEAR | SwScaleCPUFlags(), NULL, NULL, NULL);
+                  m_dllSwScale->sws_scale(m_sw_scale_ctx, src, srcStride, 0, pBuffer->m_height, dst, dstStride);
+                }
               break;
               default:
               break;
@@ -1632,6 +1632,10 @@ void CCrystalHD::SetDropState(bool bDrop)
 ////////////////////////////////////////////////////////////////////////////////////////////
 bool CCrystalHD::extract_sps_pps_from_avcc(int extradata_size, void *extradata)
 {
+  // based on gstbcmdec.c (bcmdec_insert_sps_pps)
+  // which is Copyright(c) 2008 Broadcom Corporation.
+  // and Licensed LGPL 2.1
+
   uint8_t *data = (uint8_t*)extradata;
   uint32_t data_size = extradata_size;
   int profile;

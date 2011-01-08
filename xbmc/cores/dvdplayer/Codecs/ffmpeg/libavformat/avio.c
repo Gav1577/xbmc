@@ -95,7 +95,7 @@ int register_protocol(URLProtocol *protocol)
 #endif
 
 static int url_alloc_for_protocol (URLContext **puc, struct URLProtocol *up,
-                       const char *filename, int flags)
+                                   const char *filename, int flags)
 {
     URLContext *uc;
     int err;
@@ -123,7 +123,7 @@ static int url_alloc_for_protocol (URLContext **puc, struct URLProtocol *up,
         if (up->priv_data_class) {
             *(const AVClass**)uc->priv_data = up->priv_data_class;
             av_opt_set_defaults(uc->priv_data);
-    }
+        }
     }
 
     *puc = uc;

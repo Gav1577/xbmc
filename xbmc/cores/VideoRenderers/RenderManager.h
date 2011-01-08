@@ -250,7 +250,7 @@ protected:
   CSharedSection m_sharedSection;
 
   bool m_bReconfigured;
-  
+
   int m_rendermethod;
 
 #ifdef HAS_DS_PLAYER

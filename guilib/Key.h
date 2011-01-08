@@ -533,9 +533,9 @@ public:
   inline unsigned int GetHeld() const   { return m_held; }
 
   enum Modifier {
-    MODIFIER_CTRL = 0x00010000,
+    MODIFIER_CTRL  = 0x00010000,
     MODIFIER_SHIFT = 0x00020000,
-    MODIFIER_ALT = 0x00040000,
+    MODIFIER_ALT   = 0x00040000,
     MODIFIER_RALT  = 0x00080000,
     MODIFIER_SUPER = 0x00100000
   };

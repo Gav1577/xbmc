@@ -203,7 +203,7 @@ bool CGUIWindowFullScreen::OnAction(const CAction &action)
     if (m_timeCodePosition > 0)
       SeekToTimeCodeStamp(SEEK_RELATIVE, SEEK_BACKWARD);
     else
-    g_application.m_pPlayer->Seek(false, false);
+      g_application.m_pPlayer->Seek(false, false);
     return true;
     break;
 
@@ -211,7 +211,7 @@ bool CGUIWindowFullScreen::OnAction(const CAction &action)
     if (m_timeCodePosition > 0)
       SeekToTimeCodeStamp(SEEK_RELATIVE, SEEK_FORWARD);
     else
-    g_application.m_pPlayer->Seek(true, false);
+      g_application.m_pPlayer->Seek(true, false);
     return true;
     break;
 
@@ -219,7 +219,7 @@ bool CGUIWindowFullScreen::OnAction(const CAction &action)
     if (m_timeCodePosition > 0)
       SeekToTimeCodeStamp(SEEK_RELATIVE, SEEK_BACKWARD);
     else
-    g_application.m_pPlayer->Seek(false, true);
+      g_application.m_pPlayer->Seek(false, true);
     return true;
     break;
 
@@ -227,7 +227,7 @@ bool CGUIWindowFullScreen::OnAction(const CAction &action)
     if (m_timeCodePosition > 0)
       SeekToTimeCodeStamp(SEEK_RELATIVE, SEEK_FORWARD);
     else
-    g_application.m_pPlayer->Seek(true, true);
+      g_application.m_pPlayer->Seek(true, true);
     return true;
     break;
 
@@ -903,8 +903,8 @@ void CGUIWindowFullScreen::SeekToTimeCodeStamp(SEEK_TYPE type, SEEK_DIRECTION di
   if (total < g_application.GetTotalTime())
     g_application.SeekTime(total);
 
-      m_timeCodePosition = 0;
-      m_timeCodeShow = false;
+  m_timeCodePosition = 0;
+  m_timeCodeShow = false;
 }
 
 double CGUIWindowFullScreen::GetTimeCodeStamp()

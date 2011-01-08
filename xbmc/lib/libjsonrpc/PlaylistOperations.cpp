@@ -63,22 +63,22 @@ JSON_STATUS CPlaylistOperations::Create(const CStdString &method, ITransportLaye
     if (playlist == NULL || !playlist->Load(file))
       return playlist == NULL ? InvalidParams : InternalError;
   }
-    else
+  else
     playlist = CPlayListPtr(new CPlayList());
 
   if (id.size() == 0)
+  {
+    do
     {
-      do
-      {
-        id = StringUtils::CreateUUID();
-      } while (VirtualPlaylists.find(id) != VirtualPlaylists.end());
-    }
+      id = StringUtils::CreateUUID();
+    } while (VirtualPlaylists.find(id) != VirtualPlaylists.end());
+  }
 
   CSingleLock lock(VirtualCriticalSection);
-    VirtualPlaylists[id] = playlist;
-    result[PLAYLIST_MEMBER_VIRTUAL] = id;
+  VirtualPlaylists[id] = playlist;
+  result[PLAYLIST_MEMBER_VIRTUAL] = id;
 
-    return OK;
+  return OK;
 }
 
 JSON_STATUS CPlaylistOperations::Destroy(const CStdString &method, ITransportLayer *transport, IClient *client, const Value &parameterObject, Value &result)

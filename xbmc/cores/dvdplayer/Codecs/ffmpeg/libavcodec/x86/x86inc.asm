@@ -271,7 +271,7 @@ DECLARE_REG 6, rax, eax, ax,  al,  [rsp + stack_offset + 56]
     ASSERT %2 >= %1
     %assign regs_used %2
     ASSERT regs_used <= 7
-        %assign xmm_regs_used %3
+    %assign xmm_regs_used %3
     ASSERT xmm_regs_used <= 16
     %if regs_used > 4
         push r4

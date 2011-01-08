@@ -394,7 +394,7 @@ static av_cold int read_specific_config(ALSDecContext *ctx)
             ctx->crc       = 0xFFFFFFFF;
             ctx->crc_org   = ~get_bits_long(&gb, 32);
         } else
-        skip_bits_long(&gb, 32);
+            skip_bits_long(&gb, 32);
     }
 
 

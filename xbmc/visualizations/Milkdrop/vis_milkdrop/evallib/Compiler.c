@@ -161,7 +161,7 @@ static void freeBlocks(llBlock *start)
 	{
     llBlock *llB = start->next;
     VirtualFree(start, 0, MEM_RELEASE);
-	  start=llB;
+    start=llB;
 	}
 }
 

@@ -417,7 +417,7 @@ static int flv_read_packet(AVFormatContext *s, AVPacket *pkt)
                 if (cfg.ext_sample_rate)
                     st->codec->sample_rate = cfg.ext_sample_rate;
                 else
-                st->codec->sample_rate = cfg.sample_rate;
+                    st->codec->sample_rate = cfg.sample_rate;
                 dprintf(s, "mp4a config channels %d sample rate %d\n",
                         st->codec->channels, st->codec->sample_rate);
             }

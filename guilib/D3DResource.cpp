@@ -127,16 +127,16 @@ void CD3DTexture::SaveTexture()
     && !(m_usage & D3DUSAGE_DEPTHSTENCIL)
     && !(m_pool == D3DPOOL_DEFAULT && (m_usage & D3DUSAGE_DYNAMIC) == 0))
     {
-    D3DLOCKED_RECT lr;
-    if (LockRect( 0, &lr, NULL, D3DLOCK_READONLY ))
-    {
-      m_pitch = lr.Pitch;
-      unsigned int memUsage = GetMemoryUsage(lr.Pitch);
-      m_data = new unsigned char[memUsage];
-      memcpy(m_data, lr.pBits, memUsage);
-      UnlockRect(0);
+      D3DLOCKED_RECT lr;
+      if (LockRect( 0, &lr, NULL, D3DLOCK_READONLY ))
+      {
+        m_pitch = lr.Pitch;
+        unsigned int memUsage = GetMemoryUsage(lr.Pitch);
+        m_data = new unsigned char[memUsage];
+        memcpy(m_data, lr.pBits, memUsage);
+        UnlockRect(0);
+      }
     }
-  }
   }
   SAFE_RELEASE(m_texture);
 }

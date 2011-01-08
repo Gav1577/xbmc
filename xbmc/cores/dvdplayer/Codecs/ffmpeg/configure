@@ -2201,7 +2201,7 @@ case $target_os in
     haiku)
         prefix_default="/boot/common"
         network_extralibs="-lnetwork"
-            ;;
+        ;;
     sunos)
         FFSERVERLDFLAGS=""
         SHFLAGS='-shared -Wl,-h,$$(@F)'

@@ -91,20 +91,20 @@ void CKey::Reset()
 const CKey& CKey::operator=(const CKey& key)
 {
   if (&key == this) return * this;
-  m_leftTrigger = key.m_leftTrigger;
+  m_leftTrigger  = key.m_leftTrigger;
   m_rightTrigger = key.m_rightTrigger;
-  m_leftThumbX = key.m_leftThumbX;
-  m_leftThumbY = key.m_leftThumbY;
-  m_rightThumbX = key.m_rightThumbX;
-  m_rightThumbY = key.m_rightThumbY;
-  m_repeat = key.m_repeat;
-  m_fromHttpApi = key.m_fromHttpApi;
+  m_leftThumbX   = key.m_leftThumbX;
+  m_leftThumbY   = key.m_leftThumbY;
+  m_rightThumbX  = key.m_rightThumbX;
+  m_rightThumbY  = key.m_rightThumbY;
+  m_repeat       = key.m_repeat;
+  m_fromHttpApi  = key.m_fromHttpApi;
   m_buttonCode   = key.m_buttonCode;
   m_vkey         = key.m_vkey;
   m_unicode     = key.m_unicode;
   m_ascii       = key.m_ascii;
   m_modifiers    = key.m_modifiers;
-  m_held = key.m_held;
+  m_held         = key.m_held;
   return *this;
 }
 

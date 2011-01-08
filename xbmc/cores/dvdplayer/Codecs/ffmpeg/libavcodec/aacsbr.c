@@ -1012,7 +1012,7 @@ static unsigned int read_sbr_data(AACContext *ac, SpectralBandReplication *sbr,
         }
         if (num_bits_left < 0) {
             av_log(ac->avctx, AV_LOG_ERROR, "SBR Extension over read.\n");
-    }
+        }
         if (num_bits_left > 0)
             skip_bits(gb, num_bits_left);
     }
@@ -1195,8 +1195,8 @@ static void sbr_qmf_synthesis(DSPContext *dsp, FFTContext *mdct,
             for (n = 0; n < 32; n++) {
                 X[0][i][   n] = -X[0][i][n];
                 X[0][i][32+n] =  X[1][i][31-n];
-        }
-        ff_imdct_half(mdct, mdct_buf[0], X[0][i]);
+            }
+            ff_imdct_half(mdct, mdct_buf[0], X[0][i]);
             for (n = 0; n < 32; n++) {
                 v[     n] =  mdct_buf[0][63 - 2*n];
                 v[63 - n] = -mdct_buf[0][62 - 2*n];

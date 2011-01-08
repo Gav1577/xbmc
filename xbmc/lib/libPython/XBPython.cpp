@@ -661,7 +661,7 @@ bool XBPython::isRunning(int scriptId)
         return false;
       else
         return true;
-  }
+    }
   }
   return false;
 }

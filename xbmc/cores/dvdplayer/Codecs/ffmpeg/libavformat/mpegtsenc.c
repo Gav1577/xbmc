@@ -427,7 +427,7 @@ static int mpegts_write_header(AVFormatContext *s)
         /* MPEG pid values < 16 are reserved. Applications which set st->id in
          * this range are assigned a calculated pid. */
         if (st->id < 16) {
-        ts_st->pid = DEFAULT_START_PID + i;
+            ts_st->pid = DEFAULT_START_PID + i;
         } else if (st->id < 0x1FFF) {
             ts_st->pid = st->id;
         } else {

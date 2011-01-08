@@ -282,10 +282,10 @@ static av_cold int flac_encode_init(AVCodecContext *avctx)
             }
         } else if(avctx->min_prediction_order < MIN_LPC_ORDER ||
                   avctx->min_prediction_order > MAX_LPC_ORDER) {
-                av_log(avctx, AV_LOG_ERROR, "invalid min prediction order: %d\n",
-                       avctx->min_prediction_order);
-                return -1;
-            }
+            av_log(avctx, AV_LOG_ERROR, "invalid min prediction order: %d\n",
+                   avctx->min_prediction_order);
+            return -1;
+        }
         s->options.min_prediction_order = avctx->min_prediction_order;
     }
     if (s->options.lpc_type == AV_LPC_TYPE_NONE) {
@@ -299,10 +299,10 @@ static av_cold int flac_encode_init(AVCodecContext *avctx)
             }
         } else if (avctx->max_prediction_order < MIN_LPC_ORDER ||
                    avctx->max_prediction_order > MAX_LPC_ORDER) {
-                av_log(avctx, AV_LOG_ERROR, "invalid max prediction order: %d\n",
-                       avctx->max_prediction_order);
-                return -1;
-            }
+            av_log(avctx, AV_LOG_ERROR, "invalid max prediction order: %d\n",
+                   avctx->max_prediction_order);
+            return -1;
+        }
         s->options.max_prediction_order = avctx->max_prediction_order;
     }
     if(s->options.max_prediction_order < s->options.min_prediction_order) {

@@ -591,7 +591,7 @@ void CKeyboardStat::Initialize()
 
 void CKeyboardStat::Reset()
 {
-  m_VKey = 0;
+  m_VKey      = 0;
   m_wUnicode  = '\0';
   m_cAscii    = '\0';
   m_Modifiers = 0;

@@ -147,7 +147,6 @@ IMAGES= \
 	flagging/video/xvid.png \
 	flagging/video/vhs.png \
 	floor.png \
-	floor2.png \
 	folder-focus.png \
 	GlassOverlay.png \
 	GlassTitleBar.png \
@@ -158,7 +157,6 @@ IMAGES= \
 	home-playmedia.png \
 	home-power-FO.png \
 	home-power.png \
-	HomeBackHorizontal_top.png \
 	HomeBlade.png \
 	HomeBlade_bottom.png \
 	HomeBlade_middle.png \
@@ -168,6 +166,7 @@ IMAGES= \
 	HomeBladeSub_Part2.png \
 	HomeButtonsBack.png \
 	HomeHasSub.png \
+	HomeHasSub2.png \
 	HomeIcon-Focus.png \
 	HomeIcon.png \
 	HomeNowPlayingBack.png \
